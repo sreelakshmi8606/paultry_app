@@ -286,7 +286,7 @@ class _DailyEntryState extends State<DailyEntry> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        splashColor: Colors.lightGreen,
+        splashColor: Colors.black,
         onPressed: () async {
           if (_FormKey.currentState!.validate()) {}
           Box box = Hive.box('Farm');
