@@ -36,7 +36,6 @@ class _FarmMasterState extends State<FarmMaster> {
   late String currentBatchId;
   late DateTime currentDate;
   late DateTime pastPickupDate;
-
   final GlobalKey<FormState> _FormKey = GlobalKey<FormState>();
   void _save() {
     final isValid = _FormKey.currentState!.validate();
@@ -45,7 +44,6 @@ class _FarmMasterState extends State<FarmMaster> {
     }
     _FormKey.currentState!.save();
   }
-
   FarmDataModel model = FarmDataModel.empty();
   TextEditingController pastpickcontroller = TextEditingController();
   TextEditingController dateInputcontroller = TextEditingController();
@@ -54,8 +52,6 @@ class _FarmMasterState extends State<FarmMaster> {
   TextEditingController locationInputcontroller = TextEditingController();
   TextEditingController ledgerInputcontroller = TextEditingController();
   TextEditingController batchInputcontroller = TextEditingController();
-
-
 
   WebserviceHelper web = WebserviceHelper();
   @override
@@ -90,8 +86,6 @@ class _FarmMasterState extends State<FarmMaster> {
                               color: Colors.lightGreen.shade900,
                               borderRadius: BorderRadius.circular(00)
                             ),
-
-
                             child: TextFormField(
                               validator: (value) {
                                 return Validate.txtValidator(value!);
@@ -107,7 +101,6 @@ class _FarmMasterState extends State<FarmMaster> {
                                 hintStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
-
                               ),
                             ),
                           ),
@@ -339,7 +332,6 @@ class _FarmMasterState extends State<FarmMaster> {
                         //     ),
                         //   ),
                         // ),
-
                         // SizedBox(
                         //   height: 30,
                         // )
@@ -388,7 +380,6 @@ class _FarmMasterState extends State<FarmMaster> {
   //       dateInputcontroller.text = DateFormat.yMMMd().format(selectedDate);
   //     });
   // }
-
   // _selectDate1(BuildContext context) async {
   //   final DateTime? picked = await showDatePicker(
   //     context: context,
