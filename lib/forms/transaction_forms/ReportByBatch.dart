@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, non_constant_identifier_names, unnecessary_new, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures, non_constant_identifier_names, unnecessary_new, sized_box_for_whitespace, use_key_in_widget_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -47,27 +47,32 @@ class _ReportByBatchState extends State<ReportByBatch> {
                         border: InputBorder.none,
                         hintText: 'Date',
                         hintStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black38),
+                            fontWeight: FontWeight.bold, color: Colors.black38),
                         icon: Icon(
                           Icons.calendar_today_outlined,
                           color: Colors.black38,
                         ),
                       ),
                       onSaved: (String? value) {
-                       // chick.Date = value! as DateTime;
+                        // chick.Date = value! as DateTime;
                       },
                       controller: DateInputController,
                     ),
                   ),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
 
+              )
             ],
           ),
           SizedBox(
             height: 15,
           ),
+
           // Flexible(
           //   flex: 25,
           //   child: BlocBuilder<ReportblocCubit, ReportblocState>(
@@ -141,6 +146,7 @@ class _ReportByBatchState extends State<ReportByBatch> {
       ),
     );
   }
+
   _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -156,4 +162,3 @@ class _ReportByBatchState extends State<ReportByBatch> {
       });
   }
 }
-
