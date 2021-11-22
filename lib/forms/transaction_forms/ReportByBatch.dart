@@ -7,6 +7,7 @@ class ReportByBatch extends StatefulWidget {
   late int NumberOfChicken;
   late int Numberdead;
   late int AverageWeight;
+   late String FarmId;
   @override
   _ReportByBatchState createState() => _ReportByBatchState();
 }
@@ -17,6 +18,7 @@ class _ReportByBatchState extends State<ReportByBatch> {
   late int NumberOfChicken;
   late int Numberdead;
   late int AverageWeight;
+  late String FarmId;
 
   TextEditingController DateInputController = new TextEditingController();
   @override
@@ -64,9 +66,34 @@ class _ReportByBatchState extends State<ReportByBatch> {
               SizedBox(
                 height: 10,
               ),
-              Container(
-
-              )
+              DropdownButtonFormField(
+                value: FarmId,
+                onChanged: (fi) => setState(() => FarmId = fi),
+                decoration: InputDecoration(
+                    hintText: 'Select FarmId',
+                    hintStyle: TextStyle(color: Colors.pink[800]),
+                    icon: Icon(
+                      Icons.dehaze_rounded,
+                      color: Colors.red,
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide.none)),
+                validator: (value) =>
+                value == null ? "field required" : null,
+                items: [
+                  'Farm1',
+                  'Farm2',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem(
+                    child: Text(
+                      value,
+                      style: TextStyle(color: Colors.pink[900]),
+                    ),
+                    value: value,
+                  );
+                }).toList(),
+              ),
             ],
           ),
           SizedBox(
