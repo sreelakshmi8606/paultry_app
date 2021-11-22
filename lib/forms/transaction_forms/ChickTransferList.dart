@@ -26,6 +26,12 @@ class _ChickTransferListState extends State<ChickTransferList> {
     box = Hive.box('Farm');
     setState(() {});
   }
+  _addInfo(){
+    print('Info Added');
+    // box.put('FarmName',
+    //     data[index]['_source']['FarmName']);
+    // box.put('FarmID', data[index]['_id']);
+  }
   _getInfo() {
     var FarmName = box.get('FarmName');
     var FarmId = box.get('FarmId');
@@ -108,7 +114,7 @@ class _ChickTransferListState extends State<ChickTransferList> {
                             selectedTileColor: Colors.white,
                             onTap: () {
                               print('tap');
-                              // _addInfo();
+                               _addInfo();
                               box.put('FarmName',
                                   data[index]['_source']['FarmName']);
                               box.put('FarmID', data[index]['_id']);

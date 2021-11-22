@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
+import '../../FarmModel.dart';
+
 class ChickTransfer extends StatefulWidget {
   late DateTime Date;
   late String FarmId;
@@ -35,7 +37,13 @@ class _ChickTransferState extends State<ChickTransfer> {
       new TextEditingController();
   TextEditingController batchInputcontroller = new TextEditingController();
   WebserviceHelper web = WebserviceHelper();
-
+  // void addFarm(FarmDataModel farms) {
+  //   final farmBox = Hive.box('Farm');
+  //   farmBox.add(farms);
+  // }
+  // final farms = farmBox.getAt(index) as FarmDataModel;
+  // final newContact = FarmDataModel(_name,int.parse(_age));
+  // addFarm(newfarm);
   @override
   Widget build(BuildContext context) {
     // final height = MediaQuery.of(context).size.height;
@@ -56,7 +64,49 @@ class _ChickTransferState extends State<ChickTransfer> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(height: 50),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 168.0),
+                        child: Container(
+                          // margin: EdgeInsets.symmetric(horizontal: 10),
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.lightGreen.shade900,
+                            borderRadius: BorderRadius.circular(00),
+                          ),
+
+                          child: Text(
+                            'Farm Name',
+                            style: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
+                          // TextFormField(
+                          //   validator: (value) {
+                          //     return Validate.txtValidator(value!);
+                          //   },
+                          //   onSaved: (String? value) {
+                          //     chick.FarmName = value!;
+                          //   },
+                          //   controller: farmnameInputcontroller,
+                          //   keyboardType: TextInputType.text,
+                          //   decoration: InputDecoration(
+                          //     border: InputBorder.none,
+                          //     hintText: 'Farm Name',
+                          //     hintStyle: TextStyle(
+                          //         fontWeight: FontWeight.bold,
+                          //         color: Colors.black38),
+                          //     icon: Icon(
+                          //       Icons.drive_file_rename_outline,
+                          //       color: Colors.black38,
+                          //     ),
+                          //   ),
+                          // ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         padding:
