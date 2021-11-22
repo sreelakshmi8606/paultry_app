@@ -307,38 +307,5 @@ class _ChickTransferState extends State<ChickTransfer> {
         pickInputcontroller.text = DateFormat.yMMMd().format(selectedDate);
       });
   }
-  Widget _buildListView() {
-    // ignore: deprecated_member_use
-    return WatchBoxBuilder(
-        box: Hive.box('contacts'),
-        builder: (context, contactsBox) {
-          return Container(
-            child: ,
-          );
-            // ListView.builder(
-            //   itemCount: contactsBox.length,
-            //   itemBuilder: (context, index) {
-            //     final contact = contactsBox.getAt(index) as FarmDataModel;
-            //     return ListTile(
-            //         title: Text(contact.FarmName),
-            //         // subtitle: Text(contact.age.toString()),
-            //         trailing:
-            //         Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-            //           IconButton(
-            //               icon: Icon(Icons.refresh),
-            //               onPressed: () {
-            //                 contactsBox.putAt(
-            //                   index,
-            //                   Contact('${contact.name}*', contact.age + 1),
-            //                 );
-            //               }),
-            //           IconButton(
-            //               icon: Icon(Icons.delete),
-            //               onPressed: () {
-            //                 contactsBox.deleteAt(index);
-            //               })
-            //         ]));
-            //   });
-        });
-  }
+
 }
