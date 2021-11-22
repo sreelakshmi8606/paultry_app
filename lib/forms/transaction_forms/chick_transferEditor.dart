@@ -6,6 +6,7 @@ import 'package:e_comm/validate.dart';
 import 'package:e_comm/webservices/WebServiceHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 
 import '../../FarmModel.dart';
@@ -305,5 +306,39 @@ class _ChickTransferState extends State<ChickTransfer> {
         date1 = selectedDate.toString();
         pickInputcontroller.text = DateFormat.yMMMd().format(selectedDate);
       });
+  }
+  Widget _buildListView() {
+    // ignore: deprecated_member_use
+    return WatchBoxBuilder(
+        box: Hive.box('contacts'),
+        builder: (context, contactsBox) {
+          return Container(
+            child: ,
+          );
+            // ListView.builder(
+            //   itemCount: contactsBox.length,
+            //   itemBuilder: (context, index) {
+            //     final contact = contactsBox.getAt(index) as FarmDataModel;
+            //     return ListTile(
+            //         title: Text(contact.FarmName),
+            //         // subtitle: Text(contact.age.toString()),
+            //         trailing:
+            //         Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
+            //           IconButton(
+            //               icon: Icon(Icons.refresh),
+            //               onPressed: () {
+            //                 contactsBox.putAt(
+            //                   index,
+            //                   Contact('${contact.name}*', contact.age + 1),
+            //                 );
+            //               }),
+            //           IconButton(
+            //               icon: Icon(Icons.delete),
+            //               onPressed: () {
+            //                 contactsBox.deleteAt(index);
+            //               })
+            //         ]));
+            //   });
+        });
   }
 }
