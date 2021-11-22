@@ -5,6 +5,7 @@ import 'package:e_comm/data_models/transactions/chick_transfer.dart';
 import 'package:e_comm/validate.dart';
 import 'package:e_comm/webservices/WebServiceHelper.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
 class ChickTransfer extends StatefulWidget {
@@ -30,9 +31,11 @@ class _ChickTransferState extends State<ChickTransfer> {
   TextEditingController pickInputcontroller = new TextEditingController();
   TextEditingController farmidInputcontroller = new TextEditingController();
   TextEditingController farmnameInputcontroller = new TextEditingController();
-  TextEditingController numberofchickInputcontroller = new TextEditingController();
+  TextEditingController numberofchickInputcontroller =
+      new TextEditingController();
   TextEditingController batchInputcontroller = new TextEditingController();
   WebserviceHelper web = WebserviceHelper();
+
   @override
   Widget build(BuildContext context) {
     // final height = MediaQuery.of(context).size.height;
@@ -220,8 +223,10 @@ class _ChickTransferState extends State<ChickTransfer> {
       ),
       floatingActionButton: FloatingActionButton(
         splashColor: Colors.lightGreen,
-
         onPressed: () async {
+          Box box = Hive.box('Farm');
+          chick.FarmName = box.get('FarmName');
+          chick.FarmId = box.get('FarmID');
           chick.Date = selectedDate;
           print('selected date $selectedDate');
           chick.FarmId = farmidInputcontroller.text;

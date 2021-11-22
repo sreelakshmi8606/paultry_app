@@ -4,6 +4,7 @@ import 'package:e_comm/HatcheryTransactionBloc/cubit/hatcherytransactionlist_cub
 import 'package:e_comm/forms/transaction_forms/DateFilter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'Hatchery_Transaction_Editor.dart';
 
 class HatcheryTransactionList extends StatefulWidget {
@@ -18,6 +19,23 @@ class _HatcheryTransactionListState extends State<HatcheryTransactionList> {
 
   DateTime fromDate = DateTime.now();
   DateTime toDate = DateTime.now();
+  late Box box;
+  void initState() {
+    super.initState();
+    box = Hive.box('Farm');
+    setState(() {});
+  }
+
+  _addInfo() {
+    box.put('FarmName', 'FarmName');
+    box.put('FarmID', 'FarmId');
+  }
+
+  _getInfo() {
+    var Farmname = box.get('FarmName');
+    var FarmId = box.get('FarmId');
+    print('Info retrieved from box: $Farmname ($FarmId)');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +45,7 @@ class _HatcheryTransactionListState extends State<HatcheryTransactionList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _getInfo();
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Hatchery()));
         },
@@ -76,6 +95,9 @@ class _HatcheryTransactionListState extends State<HatcheryTransactionList> {
                           selected: true,
                           selectedTileColor: Colors.white,
                           onTap: () {
+                            box.put('FarmName', data[index]['_source']['FarmName']);
+                            box.put('FarmID', data[index]['_id']);
+                            print('Info Added');
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

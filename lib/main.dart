@@ -23,7 +23,6 @@ void main() async {
   Hive.init(directory.path);
   await Hive.initFlutter();
   //Hive.registerAdapter(FarmDataModelAdapter());
-
  await Hive.openBox('Farm');
   runApp(const MyApp());
 }

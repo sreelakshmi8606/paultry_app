@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:e_comm/form_menu.dart';
+import 'package:hive/hive.dart';
 
 import 'package:intl/intl.dart';
 
@@ -19,6 +20,18 @@ class ChickTransferList extends StatefulWidget {
 }
 
 class _ChickTransferListState extends State<ChickTransferList> {
+  late Box box;
+  void initState() {
+    super.initState();
+    box = Hive.box('Farm');
+    setState(() {});
+  }
+  _getInfo() {
+    var FarmName = box.get('FarmName');
+    var FarmId = box.get('FarmId');
+    print('Info retrieved from box: $FarmName ($FarmId)');
+    print('Info retrieved');
+  }
   DateTime fromDate = DateTime.now();
   DateTime toDate = DateTime.now();
   @override
@@ -30,6 +43,7 @@ class _ChickTransferListState extends State<ChickTransferList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _getInfo();
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => ChickTransfer()));
         },
@@ -93,6 +107,12 @@ class _ChickTransferListState extends State<ChickTransferList> {
                             selected: true,
                             selectedTileColor: Colors.white,
                             onTap: () {
+                              print('tap');
+                              // _addInfo();
+                              box.put('FarmName',
+                                  data[index]['_source']['FarmName']);
+                              box.put('FarmID', data[index]['_id']);
+                              print('Info Added');
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

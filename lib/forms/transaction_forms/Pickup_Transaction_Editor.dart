@@ -4,6 +4,7 @@ import 'package:e_comm/data_models/transactions/pickup.dart';
 import 'package:e_comm/validate.dart';
 import 'package:e_comm/webservices/WebServiceHelper.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
 class PickUp extends StatefulWidget {
@@ -290,6 +291,9 @@ class _PickUpState extends State<PickUp> {
       floatingActionButton: FloatingActionButton(
         splashColor: Colors.lightGreen,
         onPressed: () async {
+          Box box = Hive.box('Farm');
+          // chick.FarmName = box.get('FarmName');
+          pick.FarmId = box.get('FarmID');
           pick.date = selectedDate;
           pick.BatchId = batchInputcontroller.text;
           pick.FarmId = farmidInputcontroller.text;

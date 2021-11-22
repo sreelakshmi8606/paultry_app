@@ -4,6 +4,7 @@ import 'package:e_comm/DeliveryBloc/cubit/deliverylist_cubit.dart';
 import 'package:e_comm/forms/transaction_forms/Delivery_Editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 
 class DeliveryListWidget extends StatefulWidget {
@@ -16,6 +17,24 @@ class DeliveryListWidget extends StatefulWidget {
 class _DeliveryListWidgetState extends State<DeliveryListWidget> {
   // DateTime fromDate = DateTime.now();
   //DateTime toDate = DateTime.now();
+  late Box box;
+  void initState() {
+    super.initState();
+    box = Hive.box('Farm');
+    setState(() {});
+  }
+
+  _addInfo() {
+    box.put('FarmName', 'FarmName');
+    box.put('FarmID', 'FarmId');
+    print('Info Added');
+  }
+
+  _getInfo() {
+    var Farmname = box.get('FarmName');
+    var FarmId = box.get('FarmId');
+    print('Info retrieved from box: $Farmname ($FarmId)');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +44,7 @@ class _DeliveryListWidgetState extends State<DeliveryListWidget> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _getInfo();
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Delivery()));
         },
@@ -83,6 +103,9 @@ class _DeliveryListWidgetState extends State<DeliveryListWidget> {
                             selected: true,
                             selectedTileColor: Colors.white,
                             onTap: () {
+                              box.put('FarmName', data[index]['_source']['FarmName']);
+                              box.put('FarmID', data[index]['_id']);
+                              print('Info Added');
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
