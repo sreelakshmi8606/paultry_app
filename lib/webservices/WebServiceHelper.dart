@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, avoid_print, avoid_function_literals_in_foreach_calls, prefer_const_declarations
+// ignore_for_file: file_names, avoid_print, avoid_function_literals_in_foreach_calls, prefer_const_declarations, non_constant_identifier_names
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
@@ -334,51 +334,43 @@ class WebserviceHelper {
     return data;
   }
 
-
-  // Future<dynamic> getReport({Map? map}) async {
-  //   // String args='';
-  //   // if (map != null) {
-  //   //   map.keys.forEach(
-  //   //         (element) {
-  //   //       print('elem : $element ${map[element]}');
-  //   //       args += '&$element=${map[element]}';
-  //   //     },
-  //   //   );
-  //   // }
-  //   String url ='';
-  //   print("url : $url");
-  //   // Dio dio = Dio(
-  //   //     BaseOptions(headers: {'dbName': Hive.box('settings').get('DBName')}));
-  //   // List data = [];
-  //   Response response;
-  //   try {
-  //     response = await dio.get(url);
-  //     print(response.data);
-  //     // data = response.data['data'];
-  //     return response.data['data'];
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return null;
-  //   }
-  // }
-  Future<List> getReport() async {
-    List dvals = [
-      // {
-      //    'NumberOfChicken' :46,
-      //  }
-    ];
-    String url = "31.220.109.198:8050/reports";
-    print(url);
-    Response response;
+  Future<List> getReport(
+      {required DateTime fromDate, required DateTime toDate}) async {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    String fromDateStr = formatter.format(fromDate);
+    String toDateStr = formatter.format(toDate);
+    List dvals = [];
+    var body = {'fromdate': fromDateStr, 'todate': toDateStr};
+    String url = "http://31.220.109.198:8050/reports";
     try {
-      response = await dio.post(url);
-     // print(url);
-      print(response.data);
-      // data = response.data['data'];
-      return response.data['data'];
+      Response response = await dio.post(url, data: body);
+      print(url);
+      dynamic tdata = json.decode(response.data);
+      dvals = tdata['hits'];
+      print(tdata['hits']);
     } catch (e) {
+      print('Exception');
       print(e.toString());
-      return dvals;
     }
+    return dvals;
+  }
+  Future<List> getReportById(
+      {required DateTime Date}) async {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    String date1 = formatter.format(Date);
+    List dvals = [];
+    var body = {'Date': date1, };
+    String url = "http://31.220.109.198:8050/ReportByFarmId";
+    try {
+      Response response = await dio.post(url, data: body);
+      print(url);
+      dynamic tdata = json.decode(response.data);
+      dvals = tdata['hits'];
+      print(tdata['hits']);
+    } catch (e) {
+      print('Exception');
+      print(e.toString());
+    }
+    return dvals;
   }
 }
