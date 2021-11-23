@@ -121,7 +121,7 @@ class _ChickTransferState extends State<ChickTransfer> {
                             child: TextFormField(
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: 'Date',
+                                hintText: 'date',
                                 hintStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black38),
