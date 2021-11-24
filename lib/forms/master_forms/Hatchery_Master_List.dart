@@ -1,4 +1,3 @@
-
 // ignore_for_file: file_names, prefer_const_constructors, curly_braces_in_flow_control_structures
 
 import 'package:e_comm/HatcheryMasterBloc/cubit/masterhatcherylist_cubit.dart';
@@ -23,8 +22,8 @@ class _MasterHatcheryWidgetState extends State<MasterHatcheryWidget> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HatcheryMaster()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => HatcheryMaster()));
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.lightGreen.shade900,
@@ -48,13 +47,18 @@ class _MasterHatcheryWidgetState extends State<MasterHatcheryWidget> {
                     elevation: 10,
                     child: ListTile(
                       title: Center(
-                        child: Text(data[index]['_source']['name']??'NO TAG',
-                          style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,),
+                        child: Text(
+                          data[index]['_source']['name'] ?? 'NO TAG',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                       dense: true,
                       //tileColor: Colors.orangeAccent,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0)),
                       selected: true,
                       selectedTileColor: Colors.white,
                       onTap: () {
@@ -75,4 +79,3 @@ class _MasterHatcheryWidgetState extends State<MasterHatcheryWidget> {
     );
   }
 }
-

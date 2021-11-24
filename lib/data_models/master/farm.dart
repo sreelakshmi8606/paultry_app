@@ -39,7 +39,7 @@ FarmDataModel.empty();
       attenderLedger: attenderLedger ?? this.attenderLedger,
       currentBatchId: currentBatchId ?? this.currentBatchId,
       currentDate: currentDate ?? this.currentDate,
-      lastPickupDate: lastPickupDate ?? this.lastPickupDate,
+        lastPickupDate: lastPickupDate ?? this.lastPickupDate,
       FarmId: FarmId??this.FarmId
     );
   }

@@ -53,7 +53,7 @@ class TransactionHatecheryDataModel {
       'chooseHatchery': chooseHatchery,
       'numberOfeggs': numberOfeggs,
       'chickProduced': chickProduced,
-       'pickUpdate': pickUpdate.toString(),
+       'pickUpdate': pickUpdate?.millisecondsSinceEpoch,
 
 
     };
@@ -68,7 +68,8 @@ class TransactionHatecheryDataModel {
       chooseHatchery: map['chooseHatchery'],
       numberOfeggs: map['numberOfeggs'],
       chickProduced: map['chickProduced'],
-      pickUpdate: DateTime.fromMillisecondsSinceEpoch(map['pickUpdate']),
+      pickUpdate: DateTime.fromMillisecondsSinceEpoch(
+          int.parse(map['pickUpdate'] ?? '0') * 1000),
           );
   }
 
@@ -107,12 +108,12 @@ class TransactionHatecheryDataModel {
 
   @override
   int get hashCode {
-    return createBatch.hashCode ^
+    return FarmId.hashCode^
+      createBatch.hashCode ^
          date.hashCode ^
         chooseHatchery.hashCode ^
         numberOfeggs.hashCode ^
         chickProduced.hashCode^
-    FarmId.hashCode;
      pickUpdate.hashCode;
   }
 }

@@ -273,7 +273,7 @@ TextEditingController farminputcontroller=TextEditingController();
           hatchery.numberOfeggs = double.parse(eggsInputcontroller.text);
           hatchery.chickProduced = chickproduceInputcontroller.text;
           hatchery.pickUpdate = selectedDate;
-          hatchery.FarmId = farminputcontroller.text;
+         // hatchery.FarmId = farminputcontroller.text;
 
           print('Data : ${hatchery.toJson()}');
           await web.tHatcheryRecord(model: hatchery);

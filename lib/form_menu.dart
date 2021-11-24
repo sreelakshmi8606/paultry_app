@@ -148,14 +148,14 @@ class _FormMenuState extends State<FormMenu> {
                       ..fetchData(DateTime.now(), DateTime.now()),
                     child: PickupListWidget(),
                   )));
-   // else if (index == 7)
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => BlocProvider(
-      //           create: (context) => ReportblocCubit(url: '')..fetchData(DateTime.now(), DateTime.now()),
-      //           child: View_Report(),
-      //         )));
+   else if (index == 7)
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BlocProvider(
+                create: (context) => ReportblocCubit(url: '')..fetchData(DateTime.now(), DateTime.now()),
+                child: View_Report(),
+              )));
     // else if (index == 8)
     //   Navigator.push(context,
     //       MaterialPageRoute(builder: (context) => ReportByBatch()));

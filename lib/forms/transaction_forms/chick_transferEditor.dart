@@ -10,7 +10,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
-
 class ChickTransfer extends StatefulWidget {
   late DateTime Date;
   late String FarmId;

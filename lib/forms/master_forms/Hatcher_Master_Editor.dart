@@ -97,11 +97,10 @@ class _HatcheryMasterState extends State<HatcheryMaster> {
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: ' FarmName :',
+                              hintText: ' Hatchery Name :',
                               hintStyle: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
-
                             ),
                           ),
                         ),

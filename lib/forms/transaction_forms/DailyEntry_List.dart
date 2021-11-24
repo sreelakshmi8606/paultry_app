@@ -1,17 +1,13 @@
-// ignore_for_file: file_names, prefer_const_constructors, curly_braces_in_flow_control_structures
+// ignore_for_file: file_names, prefer_const_constructors, curly_braces_in_flow_control_structures, use_key_in_widget_constructors, non_constant_identifier_names, annotate_overrides, avoid_print
 
 import 'package:e_comm/DailyEntryBloc/cubit/dailylist_cubit.dart';
 import 'package:e_comm/forms/transaction_forms/DailyEntry_Editor.dart';
 import 'package:e_comm/forms/transaction_forms/DateFilter.dart';
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:e_comm/form_menu.dart';
 import 'package:hive/hive.dart';
 
-
 class DailyEntryWidget extends StatefulWidget {
-
   @override
   _DailyEntryWidgetState createState() => _DailyEntryWidgetState();
 }
@@ -38,6 +34,7 @@ class _DailyEntryWidgetState extends State<DailyEntryWidget> {
     print('Info retrieved from box: $Farmname ($FarmId)');
     print('retrieved');
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +106,8 @@ class _DailyEntryWidgetState extends State<DailyEntryWidget> {
                             selected: true,
                             selectedTileColor: Colors.orange[100],
                             onTap: () {
-                              box.put('FarmName', data[index]['_source']['FarmName']);
+                              box.put('FarmName',
+                                  data[index]['_source']['FarmName']);
                               box.put('FarmID', data[index]['_id']);
                               print('Info Added');
                               Navigator.push(

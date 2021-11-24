@@ -103,7 +103,7 @@ class _FarmMasterState extends State<FarmMaster> {
                               controller: farmInputcontroller,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: 'Hatchery Name : ',
+                                hintText: 'Farm Name : ',
                                 hintStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),

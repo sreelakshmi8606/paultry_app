@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'DateFilter.dart';
 
-class View_Report extends StatefulWidget {
+class ReportById extends StatefulWidget {
   late int NumberOfChicken;
   late int Numberdead;
   late int AverageWeight;
 
   @override
-  _View_ReportState createState() => _View_ReportState();
+  _ReportByIdState createState() => _ReportByIdState();
 }
 
-class _View_ReportState extends State<View_Report> {
+class _ReportByIdState extends State<ReportById> {
   DateTime fromDate = DateTime.now();
   DateTime toDate = DateTime.now();
   late int NumberOfChicken;

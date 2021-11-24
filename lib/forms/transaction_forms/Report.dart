@@ -24,9 +24,8 @@ class _View_ReportState extends State<View_Report> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Report"),
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Colors.lightGreen.shade900,
       ),
-      // body: reportBuilder(context, state),
       body: Column(
         children: [
           SizedBox(
@@ -61,7 +60,7 @@ class _View_ReportState extends State<View_Report> {
                   return Center(
                     child: Text(state.msg),
                   );
-                } else if (state is reportReady ) {
+                } else if (state is reportReady) {
                   final List data = state.data;
                   return ListView.builder(
                       itemCount: data.length,
