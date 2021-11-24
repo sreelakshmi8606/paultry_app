@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
-import '../../FarmModel.dart';
 
 class ChickTransfer extends StatefulWidget {
   late DateTime Date;
@@ -22,6 +22,7 @@ class ChickTransfer extends StatefulWidget {
 }
 
 class _ChickTransferState extends State<ChickTransfer> {
+  var uuid=Uuid();
   DateTime selectedDate = DateTime.now();
   late String date1;
   late DateTime Date;
@@ -138,36 +139,36 @@ class _ChickTransferState extends State<ChickTransfer> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                        decoration: kBoxdecorationStyle,
-                        child: TextFormField(
-                          validator: (value) {
-                            return Validate.txtValidator(value!);
-                          },
-                          onSaved: (String? value) {
-                            chick.FarmId = value!;
-                          },
-                          controller: farmidInputcontroller,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Farm Id',
-                            hintStyle: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black38),
-                            icon: Icon(
-                              Icons.batch_prediction,
-                              color: Colors.black38,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      // Container(
+                      //   margin: EdgeInsets.symmetric(horizontal: 10),
+                      //   padding:
+                      //       EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                      //   decoration: kBoxdecorationStyle,
+                      //   child: TextFormField(
+                      //     validator: (value) {
+                      //       return Validate.txtValidator(value!);
+                      //     },
+                      //     onSaved: (String? value) {
+                      //       chick.FarmId = value!;
+                      //     },
+                      //     controller: farmidInputcontroller,
+                      //     keyboardType: TextInputType.text,
+                      //     decoration: InputDecoration(
+                      //       border: InputBorder.none,
+                      //       hintText: 'Farm Id',
+                      //       hintStyle: TextStyle(
+                      //           fontWeight: FontWeight.bold,
+                      //           color: Colors.black38),
+                      //       icon: Icon(
+                      //         Icons.batch_prediction,
+                      //         color: Colors.black38,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 20,
                       ),
@@ -275,12 +276,13 @@ class _ChickTransferState extends State<ChickTransfer> {
       floatingActionButton: FloatingActionButton(
         splashColor: Colors.lightGreen,
         onPressed: () async {
+          chick.FarmId = uuid.v4();
           Box box = Hive.box('Farm');
           chick.FarmName = box.get('FarmName');
           chick.FarmId = box.get('FarmID');
           chick.Date = selectedDate;
           print('selected date $selectedDate');
-          chick.FarmId = farmidInputcontroller.text;
+          //chick.FarmId = farmidInputcontroller.text;
           chick.FarmName = farmnameInputcontroller.text;
           chick.NumberOfChickens = int.parse(numberofchickInputcontroller.text);
           chick.BatchId = batchInputcontroller.text;

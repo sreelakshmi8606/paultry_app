@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, must_be_immutable, prefer_const_constructors, unnecessary_new, avoid_unnecessary_containers, avoid_print
+// ignore_for_file: file_names, must_be_immutable, prefer_const_constructors, unnecessary_new, avoid_unnecessary_containers, avoid_print, non_constant_identifier_names
 
 import 'package:e_comm/Common_ui.dart';
 import 'package:e_comm/baziercontainer.dart';
@@ -7,8 +7,10 @@ import 'package:e_comm/validate.dart';
 import 'package:e_comm/webservices/WebServiceHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class HatcheryMaster extends StatefulWidget {
+  late String FarmId;
   late String name;
   late int capacity;
   late String location;
@@ -21,7 +23,9 @@ class HatcheryMaster extends StatefulWidget {
 }
 
 class _HatcheryMasterState extends State<HatcheryMaster> {
+  var uuid=Uuid();
   DateTime selectedDate = DateTime.now();
+  late String FarmId;
   late String date;
   late String date1;
   late String name;
@@ -281,7 +285,7 @@ class _HatcheryMasterState extends State<HatcheryMaster> {
                                   ),
                                 ),
                                 onSaved: (String? value) {
-                                  mhatchery.pastPickupDate = value! as DateTime;
+                                  mhatchery.lastPickupDate = value! as DateTime;
                                 },
                                 controller: pickInputcontroller,
                               ),
@@ -305,13 +309,14 @@ class _HatcheryMasterState extends State<HatcheryMaster> {
         splashColor: Colors.lightGreen,
         onPressed: () async {
           if (_FormKey.currentState!.validate()) {}
+          mhatchery.FarmId = uuid.v4();
           mhatchery.name = nameInputcontroller.text;
           mhatchery.capacity = int.parse(capacityInputcontroller.text);
           mhatchery.location = locationInputcontroller.text;
           mhatchery.attenderLedger = ledgerInputcontroller.text;
           mhatchery.currentBatchId = batchInputcontroller.text;
           mhatchery.currentDate = selectedDate;
-          mhatchery.pastPickupDate = selectedDate;
+          mhatchery.lastPickupDate = selectedDate;
           print('Data : ${mhatchery.toJson()}');
           await web.mHatcheryRecord(model: mhatchery);
         },

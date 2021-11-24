@@ -1,11 +1,8 @@
 // ignore_for_file: file_names, non_constant_identifier_names, prefer_const_literals_to_create_immutables, camel_case_types, use_key_in_widget_constructors, prefer_const_constructors, curly_braces_in_flow_control_structures, override_on_non_overriding_member, must_be_immutable, avoid_print
 
-import 'package:e_comm/ChickBloc/cubit/chicktransfer_cubit.dart';
-import 'package:e_comm/FarmBloc/cubit/farmslist_cubit.dart';
 import 'package:e_comm/ReportBloc/reportbloc_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'DateFilter.dart';
 
 class View_Report extends StatefulWidget {
@@ -43,7 +40,6 @@ class _View_ReportState extends State<View_Report> {
                   print('$fromDate');
                   fromDate = fromDate;
                   toDate = toDate;
-                  print('fromdate11 $fromDate');
                   BlocProvider.of<ReportblocCubit>(context)
                       .fetchData(fromDate, toDate);
                 },

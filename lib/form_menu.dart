@@ -4,7 +4,6 @@ import 'package:e_comm/ChickBloc/cubit/chicktransfer_cubit.dart';
 import 'package:e_comm/PickUpBloc/cubit/pickuplist_cubit.dart';
 import 'package:e_comm/ReportBloc/reportbloc_cubit.dart';
 import 'package:e_comm/forms/master_forms/Farm_Master_List.dart';
-
 import 'package:e_comm/forms/transaction_forms/ChickTransferList.dart';
 import 'package:e_comm/forms/transaction_forms/DailyEntry_List.dart';
 import 'package:e_comm/forms/transaction_forms/Delivery_List.dart';
@@ -149,14 +148,14 @@ class _FormMenuState extends State<FormMenu> {
                       ..fetchData(DateTime.now(), DateTime.now()),
                     child: PickupListWidget(),
                   )));
-    // else if (index == 7)
-    //   Navigator.push(
-    //       context,
-    //       MaterialPageRoute(
-    //           builder: (context) => BlocProvider(
-    //             create: (context) => ReportblocCubit(url: '')..fetchData(DateTime.now(), DateTime.now()),
-    //             child: View_Report(),
-    //           )));
+   // else if (index == 7)
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => BlocProvider(
+      //           create: (context) => ReportblocCubit(url: '')..fetchData(DateTime.now(), DateTime.now()),
+      //           child: View_Report(),
+      //         )));
     // else if (index == 8)
     //   Navigator.push(context,
     //       MaterialPageRoute(builder: (context) => ReportByBatch()));
