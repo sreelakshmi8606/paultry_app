@@ -144,66 +144,66 @@ class _ChickTransferState extends State<ChickTransfer> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                        decoration: kBoxdecorationStyle,
-                        child: TextFormField(
-                          validator: (value) {
-                            return Validate.txtValidator(value!);
-                          },
-                          onSaved: (String? value) {
-                            chick.FarmId = value!;
-                          },
-                          controller: farmidInputcontroller,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Farm Id',
-                            hintStyle: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black38),
-                            icon: Icon(
-                              Icons.batch_prediction,
-                              color: Colors.black38,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                        decoration: kBoxdecorationStyle,
-                        child: TextFormField(
-                          validator: (value) {
-                            return Validate.txtValidator(value!);
-                          },
-                          onSaved: (String? value) {
-                            chick.FarmName = value!;
-                          },
-                          controller: farmnameInputcontroller,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Farm Name',
-                            hintStyle: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black38),
-                            icon: Icon(
-                              Icons.batch_prediction,
-                              color: Colors.black38,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      // Container(
+                      //   margin: EdgeInsets.symmetric(horizontal: 10),
+                      //   padding:
+                      //       EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                      //   decoration: kBoxdecorationStyle,
+                      //   child: TextFormField(
+                      //     validator: (value) {
+                      //       return Validate.txtValidator(value!);
+                      //     },
+                      //     onSaved: (String? value) {
+                      //       chick.FarmId = value!;
+                      //     },
+                      //     controller: farmidInputcontroller,
+                      //     keyboardType: TextInputType.text,
+                      //     decoration: InputDecoration(
+                      //       border: InputBorder.none,
+                      //       hintText: 'Farm Id',
+                      //       hintStyle: TextStyle(
+                      //           fontWeight: FontWeight.bold,
+                      //           color: Colors.black38),
+                      //       icon: Icon(
+                      //         Icons.batch_prediction,
+                      //         color: Colors.black38,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      // Container(
+                      //   margin: EdgeInsets.symmetric(horizontal: 10),
+                      //   padding:
+                      //       EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                      //   decoration: kBoxdecorationStyle,
+                      //   child: TextFormField(
+                      //     validator: (value) {
+                      //       return Validate.txtValidator(value!);
+                      //     },
+                      //     onSaved: (String? value) {
+                      //       chick.FarmName = value!;
+                      //     },
+                      //     controller: farmnameInputcontroller,
+                      //     keyboardType: TextInputType.text,
+                      //     decoration: InputDecoration(
+                      //       border: InputBorder.none,
+                      //       hintText: 'Farm Name',
+                      //       hintStyle: TextStyle(
+                      //           fontWeight: FontWeight.bold,
+                      //           color: Colors.black38),
+                      //       icon: Icon(
+                      //         Icons.batch_prediction,
+                      //         color: Colors.black38,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 20,
                       ),
@@ -237,33 +237,33 @@ class _ChickTransferState extends State<ChickTransfer> {
                       SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                        decoration: kBoxdecorationStyle,
-                        child: TextFormField(
-                          validator: (value) {
-                            return Validate.txtValidator(value!);
-                          },
-                          onSaved: (String? value) {
-                            chick.BatchId = value!;
-                          },
-                          controller: batchInputcontroller,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Batch Id',
-                            hintStyle: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black38),
-                            icon: Icon(
-                              Icons.batch_prediction,
-                              color: Colors.black38,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Container(
+                      //   margin: EdgeInsets.symmetric(horizontal: 10),
+                      //   padding:
+                      //       EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                      //   decoration: kBoxdecorationStyle,
+                      //   child: TextFormField(
+                      //     validator: (value) {
+                      //       return Validate.txtValidator(value!);
+                      //     },
+                      //     onSaved: (String? value) {
+                      //       chick.BatchId = value!;
+                      //     },
+                      //     controller: batchInputcontroller,
+                      //     keyboardType: TextInputType.text,
+                      //     decoration: InputDecoration(
+                      //       border: InputBorder.none,
+                      //       hintText: 'Batch Id',
+                      //       hintStyle: TextStyle(
+                      //           fontWeight: FontWeight.bold,
+                      //           color: Colors.black38),
+                      //       icon: Icon(
+                      //         Icons.batch_prediction,
+                      //         color: Colors.black38,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 20,
                       ),

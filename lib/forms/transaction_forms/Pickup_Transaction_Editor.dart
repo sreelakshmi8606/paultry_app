@@ -36,7 +36,9 @@ class _PickUpState extends State<PickUp> {
   late DateTime date;
   late String date1;
 
-  WebserviceHelper web = WebserviceHelper();late String farmname;
+  WebserviceHelper web = WebserviceHelper();
+  late String farmname;
+  late String farmid;
   @override
   void initState() {
     // TODO: implement initState
@@ -45,6 +47,7 @@ class _PickUpState extends State<PickUp> {
     print('HIVE DATA');
     print(data);
     farmname = data['FarmName']??"";
+    farmid=data['FarmId']??"";
     print('Farm Name : $farmname');
   }
 
@@ -327,7 +330,7 @@ class _PickUpState extends State<PickUp> {
           pick.FarmId = box.get('FarmID');
           pick.date = selectedDate;
           pick.BatchId = batchInputcontroller.text;
-          pick.FarmId = farmidInputcontroller.text;
+          pick.FarmId = farmid;
           pick.Weight = double.parse(weightInputcontroller.text);
           pick.BalanceFeed = double.parse(balancefeedInputcontroller.text);
           pick.BalanceMedicine =

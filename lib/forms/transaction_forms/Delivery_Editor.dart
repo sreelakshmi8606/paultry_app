@@ -32,6 +32,7 @@ class _DeliveryState extends State<Delivery> {
   TextEditingController farmidInputcontroller =  TextEditingController();
   WebserviceHelper web = WebserviceHelper();
   late String farmname;
+  late String farmid;
   @override
   void initState() {
     // TODO: implement initState
@@ -40,6 +41,7 @@ class _DeliveryState extends State<Delivery> {
     print('HIVE DATA');
     print(data);
     farmname = data['FarmName']??"";
+    farmid=data['FarmId']??"";
     print('Farm Name : $farmname');
   }
   @override
@@ -343,6 +345,7 @@ class _DeliveryState extends State<Delivery> {
         splashColor: Colors.lightGreen,
         onPressed: () async {
           if (_FormKey.currentState!.validate()) {}
+          delvery.FarmId=farmid;
           delvery.SalesOrderId = orderidInputcontroller.text;
           delvery.SalesOrderQuantity =
               double.parse(orderQtyInputcontroller.text);

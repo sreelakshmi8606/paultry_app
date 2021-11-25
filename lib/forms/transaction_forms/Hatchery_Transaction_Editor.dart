@@ -46,6 +46,7 @@ class _HatcheryState extends State<Hatchery> {
 TextEditingController farminputcontroller=TextEditingController();
   WebserviceHelper web = WebserviceHelper();
   late String farmname;
+  late String farmid;
   @override
   void initState() {
     // TODO: implement initState
@@ -54,6 +55,7 @@ TextEditingController farminputcontroller=TextEditingController();
     print('HIVE DATA');
     print(data);
     farmname = data['FarmName']??"";
+    farmid=data['FarmId']??"";
     print('Farm Name : $farmname');
   }
   @override
@@ -298,7 +300,7 @@ TextEditingController farminputcontroller=TextEditingController();
         splashColor: Colors.lightGreen,
         onPressed: () async {
           if (_FormKey.currentState!.validate()) {}
-          hatchery.FarmId = uuid.v4();
+          hatchery.FarmId = farmid;
           hatchery.createBatch = batchInputcontroller.text;
           hatchery.date = selectedDate;
           hatchery.chooseHatchery = hatcheryInputcontroller.text;

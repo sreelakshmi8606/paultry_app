@@ -37,6 +37,7 @@ class _DailyEntryState extends State<DailyEntry> {
   late String date1;
   WebserviceHelper web = WebserviceHelper();
   late String farmname;
+  late String farmid;
   @override
   void initState() {
     // TODO: implement initState
@@ -45,6 +46,7 @@ class _DailyEntryState extends State<DailyEntry> {
     print('HIVE DATA');
     print(data);
     farmname = data['FarmName']??"";
+    farmid= data['FarmId']??"";
     print('Farm Name : $farmname');
   }
   @override
@@ -322,8 +324,7 @@ class _DailyEntryState extends State<DailyEntry> {
           if (_FormKey.currentState!.validate()) {}
           Box box = Hive.box('Farm');
           model.date = selectedDate;
-          model.BatchId = box.get('BatchID').toString();
-          model.farmId = box.get('FarmID');
+          model.farmId = farmid;
           model.FeedQuantity = double.parse(feedQtyInputcontroller.text);
           model.MedicineQuantity =
               double.parse(medicineQtyInputcontroller.text);
