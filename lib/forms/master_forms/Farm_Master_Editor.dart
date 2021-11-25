@@ -348,10 +348,8 @@ class _FarmMasterState extends State<FarmMaster> {
       floatingActionButton: FloatingActionButton(
         splashColor: Colors.lightGreen,
         onPressed: () async {
-
           if (_FormKey.currentState!.validate()) {}
           model.FarmId = uuid.v4();
-          //  print (capacityInputcontroller.text);
           model.FarmName = farmInputcontroller.text;
           model.location = locationInputcontroller.text;
           model.capacity = int.parse(capacityInputcontroller.text);

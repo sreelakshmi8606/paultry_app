@@ -21,7 +21,7 @@ class ChickTransfer extends StatefulWidget {
 }
 
 class _ChickTransferState extends State<ChickTransfer> {
-  var uuid=Uuid();
+ // var uuid=Uuid();
   DateTime selectedDate = DateTime.now();
   late String date1;
   late DateTime Date;
@@ -275,7 +275,7 @@ class _ChickTransferState extends State<ChickTransfer> {
       floatingActionButton: FloatingActionButton(
         splashColor: Colors.lightGreen,
         onPressed: () async {
-          chick.FarmId = uuid.v4();
+        //  chick.FarmId = uuid.v4();
           Box box = Hive.box('Farm');
           chick.FarmName = box.get('FarmName');
           chick.FarmId = box.get('FarmID');

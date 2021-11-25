@@ -23,7 +23,7 @@ class HatcheryMaster extends StatefulWidget {
 }
 
 class _HatcheryMasterState extends State<HatcheryMaster> {
-  var uuid=Uuid();
+  //var uuid=Uuid();
   DateTime selectedDate = DateTime.now();
   late String FarmId;
   late String date;
@@ -308,7 +308,7 @@ class _HatcheryMasterState extends State<HatcheryMaster> {
         splashColor: Colors.lightGreen,
         onPressed: () async {
           if (_FormKey.currentState!.validate()) {}
-          mhatchery.FarmId = uuid.v4();
+        //  mhatchery.FarmId = uuid.v4();
           mhatchery.name = nameInputcontroller.text;
           mhatchery.capacity = int.parse(capacityInputcontroller.text);
           mhatchery.location = locationInputcontroller.text;
