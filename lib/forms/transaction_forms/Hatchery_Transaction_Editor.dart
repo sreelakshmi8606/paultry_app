@@ -8,6 +8,7 @@ import 'package:e_comm/webservices/WebServiceHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class Hatchery extends StatefulWidget {
   late String createBatch;
@@ -22,6 +23,7 @@ class Hatchery extends StatefulWidget {
 }
 
 class _HatcheryState extends State<Hatchery> {
+  var uuid=Uuid();
   DateTime selectedDate = DateTime.now();
   late String date1;
   late String date2;
@@ -163,36 +165,6 @@ TextEditingController farminputcontroller=TextEditingController();
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 10),
                           padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                          decoration: kBoxdecorationStyle,
-                          child: TextFormField(
-                            validator: (value) {
-                              return Validate.txtValidator(value!);
-                            },
-                            onSaved: (String? value) {
-                              hatchery.FarmId = value!;
-                            },
-                            controller: farminputcontroller,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'FarmId',
-                              hintStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black38),
-                              icon: Icon(
-                                Icons.location_on_sharp,
-                                color: Colors.black38,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          padding:
                               EdgeInsets.symmetric(horizontal: 20, vertical: 2),
                           decoration: kBoxdecorationStyle,
                           child: TextFormField(
@@ -224,10 +196,7 @@ TextEditingController farminputcontroller=TextEditingController();
                           margin: EdgeInsets.symmetric(horizontal: 10),
                           padding:
                               EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: Colors.orange[100],
-                            borderRadius: BorderRadius.circular(25),
-                          ),
+                          decoration: kBoxdecorationStyle,
                           child: TextFormField(
                             validator: (value) {
                               return Validate.txtValidator(value!);
@@ -329,13 +298,14 @@ TextEditingController farminputcontroller=TextEditingController();
         splashColor: Colors.lightGreen,
         onPressed: () async {
           if (_FormKey.currentState!.validate()) {}
+          hatchery.FarmId = uuid.v4();
           hatchery.createBatch = batchInputcontroller.text;
           hatchery.date = selectedDate;
           hatchery.chooseHatchery = hatcheryInputcontroller.text;
           hatchery.numberOfeggs = double.parse(eggsInputcontroller.text);
           hatchery.chickProduced = chickproduceInputcontroller.text;
           hatchery.pickUpdate = selectedDate;
-          hatchery.FarmId = farminputcontroller.text;
+         // hatchery.FarmId = farminputcontroller.text;
 
           print('Data : ${hatchery.toJson()}');
           await web.tHatcheryRecord(model: hatchery);

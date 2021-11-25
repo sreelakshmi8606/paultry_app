@@ -38,19 +38,13 @@ class _ChickTransferState extends State<ChickTransfer> {
       new TextEditingController();
   TextEditingController batchInputcontroller = new TextEditingController();
   WebserviceHelper web = WebserviceHelper();
-   late String farmname;
-   late String farmid;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    var data = Hive.box("Farm").get("FarmData");
-    print('HIVE DATA');
-    print(data);
-    farmname = data['FarmName']??"";
-    farmid=data['FarmId']??"";
-    print('Farm Name : $farmname');
-  }
+  // void addFarm(FarmDataModel farms) {
+  //   final farmBox = Hive.box('Farm');
+  //   farmBox.add(farms);
+  // }
+  // final farms = farmBox.getAt(index) as FarmDataModel;
+  // final newContact = FarmDataModel(_name,int.parse(_age));
+  // addFarm(newfarm);
   @override
   Widget build(BuildContext context) {
     // final height = MediaQuery.of(context).size.height;
@@ -86,10 +80,31 @@ class _ChickTransferState extends State<ChickTransfer> {
                           ),
 
                           child: Text(
-                          farmname,
+                            'Farm Name',
                             style: TextStyle(
                                 color: Colors.white, fontWeight: FontWeight.bold),
                           ),
+                          // TextFormField(
+                          //   validator: (value) {
+                          //     return Validate.txtValidator(value!);
+                          //   },
+                          //   onSaved: (String? value) {
+                          //     chick.FarmName = value!;
+                          //   },
+                          //   controller: farmnameInputcontroller,
+                          //   keyboardType: TextInputType.text,
+                          //   decoration: InputDecoration(
+                          //     border: InputBorder.none,
+                          //     hintText: 'Farm Name',
+                          //     hintStyle: TextStyle(
+                          //         fontWeight: FontWeight.bold,
+                          //         color: Colors.black38),
+                          //     icon: Icon(
+                          //       Icons.drive_file_rename_outline,
+                          //       color: Colors.black38,
+                          //     ),
+                          //   ),
+                          // ),
                         ),
                       ),
                       SizedBox(height: 20),
@@ -123,66 +138,66 @@ class _ChickTransferState extends State<ChickTransfer> {
                           ),
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
-                      // Container(
-                      //   margin: EdgeInsets.symmetric(horizontal: 10),
-                      //   padding:
-                      //       EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                      //   decoration: kBoxdecorationStyle,
-                      //   child: TextFormField(
-                      //     validator: (value) {
-                      //       return Validate.txtValidator(value!);
-                      //     },
-                      //     onSaved: (String? value) {
-                      //       chick.FarmId = value!;
-                      //     },
-                      //     controller: farmidInputcontroller,
-                      //     keyboardType: TextInputType.text,
-                      //     decoration: InputDecoration(
-                      //       border: InputBorder.none,
-                      //       hintText: 'Farm Id',
-                      //       hintStyle: TextStyle(
-                      //           fontWeight: FontWeight.bold,
-                      //           color: Colors.black38),
-                      //       icon: Icon(
-                      //         Icons.batch_prediction,
-                      //         color: Colors.black38,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
-                      // Container(
-                      //   margin: EdgeInsets.symmetric(horizontal: 10),
-                      //   padding:
-                      //       EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                      //   decoration: kBoxdecorationStyle,
-                      //   child: TextFormField(
-                      //     validator: (value) {
-                      //       return Validate.txtValidator(value!);
-                      //     },
-                      //     onSaved: (String? value) {
-                      //       chick.FarmName = value!;
-                      //     },
-                      //     controller: farmnameInputcontroller,
-                      //     keyboardType: TextInputType.text,
-                      //     decoration: InputDecoration(
-                      //       border: InputBorder.none,
-                      //       hintText: 'Farm Name',
-                      //       hintStyle: TextStyle(
-                      //           fontWeight: FontWeight.bold,
-                      //           color: Colors.black38),
-                      //       icon: Icon(
-                      //         Icons.batch_prediction,
-                      //         color: Colors.black38,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                        decoration: kBoxdecorationStyle,
+                        child: TextFormField(
+                          validator: (value) {
+                            return Validate.txtValidator(value!);
+                          },
+                          onSaved: (String? value) {
+                            chick.FarmId = value!;
+                          },
+                          controller: farmidInputcontroller,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Farm Id',
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black38),
+                            icon: Icon(
+                              Icons.batch_prediction,
+                              color: Colors.black38,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                        decoration: kBoxdecorationStyle,
+                        child: TextFormField(
+                          validator: (value) {
+                            return Validate.txtValidator(value!);
+                          },
+                          onSaved: (String? value) {
+                            chick.FarmName = value!;
+                          },
+                          controller: farmnameInputcontroller,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Farm Name',
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black38),
+                            icon: Icon(
+                              Icons.batch_prediction,
+                              color: Colors.black38,
+                            ),
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -213,36 +228,36 @@ class _ChickTransferState extends State<ChickTransfer> {
                           ),
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
-                      // Container(
-                      //   margin: EdgeInsets.symmetric(horizontal: 10),
-                      //   padding:
-                      //       EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                      //   decoration: kBoxdecorationStyle,
-                      //   child: TextFormField(
-                      //     validator: (value) {
-                      //       return Validate.txtValidator(value!);
-                      //     },
-                      //     onSaved: (String? value) {
-                      //       chick.BatchId = value!;
-                      //     },
-                      //     controller: batchInputcontroller,
-                      //     keyboardType: TextInputType.text,
-                      //     decoration: InputDecoration(
-                      //       border: InputBorder.none,
-                      //       hintText: 'Batch Id',
-                      //       hintStyle: TextStyle(
-                      //           fontWeight: FontWeight.bold,
-                      //           color: Colors.black38),
-                      //       icon: Icon(
-                      //         Icons.batch_prediction,
-                      //         color: Colors.black38,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                        decoration: kBoxdecorationStyle,
+                        child: TextFormField(
+                          validator: (value) {
+                            return Validate.txtValidator(value!);
+                          },
+                          onSaved: (String? value) {
+                            chick.BatchId = value!;
+                          },
+                          controller: batchInputcontroller,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Batch Id',
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black38),
+                            icon: Icon(
+                              Icons.batch_prediction,
+                              color: Colors.black38,
+                            ),
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -261,10 +276,8 @@ class _ChickTransferState extends State<ChickTransfer> {
         splashColor: Colors.lightGreen,
         onPressed: () async {
           Box box = Hive.box('Farm');
-          // chick.FarmName = box.get('FarmName');
-          // chick.FarmId = box.get('FarmID');
-          chick.FarmId=farmid;
-          print('farmid:$farmid');
+          chick.FarmName = box.get('FarmName');
+          chick.FarmId = box.get('FarmID');
           chick.Date = selectedDate;
           print('selected date $selectedDate');
           chick.FarmId = farmidInputcontroller.text;

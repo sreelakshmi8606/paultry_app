@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 
 class FarmDataModel {
@@ -7,7 +9,8 @@ class FarmDataModel {
   String? attenderLedger;
   String? currentBatchId;
   DateTime? currentDate;
-  DateTime? pastPickupDate;
+  DateTime? lastPickupDate;
+  String ? FarmId;
 FarmDataModel.empty();
   FarmDataModel(
       {required this.FarmName,
@@ -16,7 +19,9 @@ FarmDataModel.empty();
       required this.attenderLedger,
       required this.currentBatchId,
       required this.currentDate,
-      required this.pastPickupDate});
+      required this.lastPickupDate,
+      required this.FarmId
+      });
   FarmDataModel copyWith({
     String? FarmName,
     String? location,
@@ -24,7 +29,8 @@ FarmDataModel.empty();
     String? attenderLedger,
     String? currentBatchId,
     DateTime? currentDate,
-    DateTime? pastPickupDate,
+    DateTime? lastPickupDate,
+    String ? FarmId,
   }) {
     return FarmDataModel(
       FarmName: FarmName ?? this.FarmName,
@@ -33,19 +39,21 @@ FarmDataModel.empty();
       attenderLedger: attenderLedger ?? this.attenderLedger,
       currentBatchId: currentBatchId ?? this.currentBatchId,
       currentDate: currentDate ?? this.currentDate,
-      pastPickupDate: pastPickupDate ?? this.pastPickupDate,
+        lastPickupDate: lastPickupDate ?? this.lastPickupDate,
+      FarmId: FarmId??this.FarmId
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'FarmName': FarmName,
-      'loction': location,
+      'location': location,
       'capacity': capacity,
       'attenderLedger': attenderLedger,
       'currentBatchId': currentBatchId,
       'currentDate': currentDate.toString(),
-      'pastPickupDate': pastPickupDate.toString(),
+      'lastPickupDate': lastPickupDate?.millisecondsSinceEpoch,
+      'FarmId':FarmId,
     };
   }
 
@@ -57,7 +65,10 @@ FarmDataModel.empty();
       attenderLedger: map['attenderLedger'],
       currentBatchId: map['currentBatchId'],
       currentDate: map['currentDate'],
-      pastPickupDate: map['pastPickupDate'],
+      lastPickupDate: DateTime.fromMillisecondsSinceEpoch(
+          int.parse(map['lastPickupDate'] ?? '0') * 1000),
+
+      FarmId: map['FarmId']
     );
   }
 
@@ -70,12 +81,13 @@ FarmDataModel.empty();
   String toString() {
     return 'FarmDataModel('
         'FarmName: $FarmName, '
-        'loction: $location,'
+        'location: $location,'
         'capacity: $capacity, '
         'attenderLedger: $attenderLedger,'
         'currentBatchId: $currentBatchId,'
         'currentDate: $currentDate,'
-        'pastPickupDate: $pastPickupDate,'
+        'lastPickupDate: $lastPickupDate,'
+        'FarmId: $FarmId,'
         ')';
   }
 
@@ -90,7 +102,8 @@ FarmDataModel.empty();
         other.attenderLedger == attenderLedger &&
         other.currentBatchId == currentBatchId &&
         other.currentDate == currentDate &&
-        other.pastPickupDate == pastPickupDate;
+        other.lastPickupDate == lastPickupDate&&
+    other.FarmId==FarmId;
   }
 
   @override
@@ -101,6 +114,7 @@ FarmDataModel.empty();
         attenderLedger.hashCode ^
         currentBatchId.hashCode ^
         currentDate.hashCode ^
-        pastPickupDate.hashCode;
+        lastPickupDate.hashCode^
+    FarmId.hashCode;
   }
 }

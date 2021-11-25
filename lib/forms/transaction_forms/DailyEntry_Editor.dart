@@ -10,7 +10,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 
 class DailyEntry extends StatefulWidget {
-  // DailyEntry({Key? key,required this.NumberDead,required this.AverageWeight}) : super(key: key);
   late DateTime date;
   late String BatchId;
   late String farmId;
@@ -26,13 +25,13 @@ class _DailyEntryState extends State<DailyEntry> {
   DateTime selectedDate = DateTime.now();
   final GlobalKey<FormState> _FormKey = GlobalKey<FormState>();
   DailyEntryFormDataModel model = DailyEntryFormDataModel.empty();
-  TextEditingController pickInputcontroller =  TextEditingController();
-  TextEditingController batchInputcontroller =  TextEditingController();
-  TextEditingController farmidInputcontroller =  TextEditingController();
-  TextEditingController feedQtyInputcontroller =  TextEditingController();
-  TextEditingController medicineQtyInputcontroller =  TextEditingController();
-  TextEditingController deadInputcontroller =  TextEditingController();
-  TextEditingController weightInputcontroller =  TextEditingController();
+  TextEditingController pickInputcontroller = TextEditingController();
+  TextEditingController batchInputcontroller = TextEditingController();
+  TextEditingController farmidInputcontroller = TextEditingController();
+  TextEditingController feedQtyInputcontroller = TextEditingController();
+  TextEditingController medicineQtyInputcontroller = TextEditingController();
+  TextEditingController deadInputcontroller = TextEditingController();
+  TextEditingController weightInputcontroller = TextEditingController();
 
   late DateTime date;
   late String date1;
@@ -93,7 +92,8 @@ class _DailyEntryState extends State<DailyEntry> {
                         SizedBox(height: 50),
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 10),
-                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 20, vertical: 2),
                           decoration: kBoxdecorationStyle,
                           child: InkWell(
                             onTap: () {

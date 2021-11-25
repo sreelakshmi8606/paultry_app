@@ -7,16 +7,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:e_comm/webservices/WebServiceHelper.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 class FarmMaster extends StatefulWidget {
+  late String FarmId;
   late String farmname;
   late String location;
   late int capacity;
   late String attenderLedger;
   late String currentBatchId;
   late DateTime currentDate;
-  late DateTime pastPickupDate;
+  late DateTime lastPickupDate;
+
 
   @override
   _FarmMasterState createState() => _FarmMasterState();
@@ -27,6 +30,7 @@ class _FarmMasterState extends State<FarmMaster> {
 
   Map<String, String> selectedValueMap = Map();
   DateTime selectedDate = DateTime.now();
+  late String FarmId;
   late String date;
   late String date1;
   late String farmname;
@@ -35,7 +39,9 @@ class _FarmMasterState extends State<FarmMaster> {
   late String attenderLedger;
   late String currentBatchId;
   late DateTime currentDate;
-  late DateTime pastPickupDate;
+  late DateTime lastPickupDate;
+
+
   final GlobalKey<FormState> _FormKey = GlobalKey<FormState>();
   void _save() {
     final isValid = _FormKey.currentState!.validate();
@@ -45,7 +51,7 @@ class _FarmMasterState extends State<FarmMaster> {
     _FormKey.currentState!.save();
   }
   FarmDataModel model = FarmDataModel.empty();
-  TextEditingController pastpickcontroller = TextEditingController();
+  TextEditingController lastpickcontroller = TextEditingController();
   TextEditingController dateInputcontroller = TextEditingController();
   TextEditingController capacityInputcontroller = TextEditingController();
   TextEditingController farmInputcontroller = TextEditingController();
@@ -227,9 +233,9 @@ class _FarmMasterState extends State<FarmMaster> {
                         // ),
                         //
 
-                        SizedBox(
-                          height: 200,
-                        ),
+                        // SizedBox(
+                        //   height: 200,
+                        // ),
                         // Container(
                         //   margin: EdgeInsets.symmetric(horizontal: 10),
                         //   padding:
@@ -296,42 +302,37 @@ class _FarmMasterState extends State<FarmMaster> {
                         //     ),
                         //   ),
                         // ),
-                        // SizedBox(
-                        //   height: 20,
-                        // ),
-                        // Container(
-                        //   margin: EdgeInsets.symmetric(horizontal: 10),
-                        //   padding:
-                        //       EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.orange[100],
-                        //     borderRadius: BorderRadius.circular(25),
-                        //   ),
-                        //   child: InkWell(
-                        //     onTap: () {
-                        //       _selectDate1(context);
-                        //     },
-                        //     child: IgnorePointer(
-                        //       child: TextFormField(
-                        //         decoration: InputDecoration(
-                        //           border: InputBorder.none,
-                        //           hintText: 'Past Pickup Date',
-                        //           hintStyle: TextStyle(
-                        //               fontWeight: FontWeight.bold,
-                        //               color: Colors.black38),
-                        //           icon: Icon(
-                        //             Icons.calendar_today_outlined,
-                        //             color: Colors.black38,
-                        //           ),
-                        //         ),
-                        //         onSaved: (String? value) {
-                        //           model.pastPickupDate = value! as DateTime;
-                        //         },
-                        //         controller: pastpickcontroller,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
+
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                          decoration: kBoxdecorationStyle,
+                          child: InkWell(
+                            onTap: () {
+                              _selectDate1(context);
+                            },
+                            child: IgnorePointer(
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Last Pickup Date',
+                                  hintStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black38),
+                                  icon: Icon(
+                                    Icons.calendar_today_outlined,
+                                    color: Colors.black38,
+                                  ),
+                                ),
+                                onSaved: (String? value) {
+                                  model.lastPickupDate = value! as DateTime;
+                                },
+                                controller: lastpickcontroller,
+                              ),
+                            ),
+                          ),
+                        ),
                         // SizedBox(
                         //   height: 30,
                         // )
@@ -347,16 +348,15 @@ class _FarmMasterState extends State<FarmMaster> {
       floatingActionButton: FloatingActionButton(
         splashColor: Colors.lightGreen,
         onPressed: () async {
-          uuid.v4();
           if (_FormKey.currentState!.validate()) {}
-          //  print (capacityInputcontroller.text);
+          model.FarmId = uuid.v4();
           model.FarmName = farmInputcontroller.text;
           model.location = locationInputcontroller.text;
           model.capacity = int.parse(capacityInputcontroller.text);
           model.attenderLedger = ledgerInputcontroller.text;
           model.currentBatchId = batchInputcontroller.text;
           model.currentDate = selectedDate;
-          model.pastPickupDate = selectedDate;
+          model.lastPickupDate = selectedDate;
           print('Data : ${model.toJson()}');
           await web.farmRecord(model: model);
         },
@@ -380,20 +380,20 @@ class _FarmMasterState extends State<FarmMaster> {
   //       dateInputcontroller.text = DateFormat.yMMMd().format(selectedDate);
   //     });
   // }
-  // _selectDate1(BuildContext context) async {
-  //   final DateTime? picked = await showDatePicker(
-  //     context: context,
-  //     initialDate: selectedDate,
-  //     firstDate: DateTime(2020),
-  //     lastDate: DateTime(2025),
-  //   );
-  //   if (picked != null)
-  //     // ignore: curly_braces_in_flow_control_structures
-  //     setState(() {
-  //       selectedDate = picked;
-  //       date1 = selectedDate.toString();
-  //       pastpickcontroller.text = DateFormat.yMMMd().format(selectedDate);
-  //     });
-  // }
+  _selectDate1(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null)
+      // ignore: curly_braces_in_flow_control_structures
+      setState(() {
+        selectedDate = picked;
+        date1 = selectedDate.toString();
+        lastpickcontroller.text = DateFormat.yMMMd().format(selectedDate);
+      });
+  }
 
 }
