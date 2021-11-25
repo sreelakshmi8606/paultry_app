@@ -13,6 +13,7 @@ class SelectBranch extends StatefulWidget {
 }
 
 class _SelectBranchState extends State<SelectBranch> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,12 +63,16 @@ class _SelectBranchState extends State<SelectBranch> {
                       selectedTileColor: Colors.white,
                       minLeadingWidth: 10,
                       onTap: () {
-                        print(data);
+                       var farmdata=data[index];
+                        print(farmdata);
                         Box box = Hive.box('Farm');
-                        box.put('FarmID', data[index]['_id']);
-                        box.put('FarmName', data[index]['_source']['FarmName']);
-                        box.put('BatchID',
-                            data[index]['_source']['currentBatchId']);
+                         box.put('FarmData',farmdata['_source']);
+                        // box.get('FarmData');
+                        // print('farmdata:$farmdata');
+                        // box.put('FarmID', data[index]['_id']);
+                        // box.put('FarmName', data[index]['_source']['FarmName']);
+                        // box.put('BatchID',
+                        // data[index]['_source']['currentBatchId']);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

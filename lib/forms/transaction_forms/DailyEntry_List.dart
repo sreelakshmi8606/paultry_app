@@ -33,10 +33,11 @@ class _DailyEntryWidgetState extends State<DailyEntryWidget> {
   }
 
   _getInfo() {
-    var Farmname = box.get('FarmName');
-    var FarmId = box.get('FarmId');
-    print('Info retrieved from box: $Farmname ($FarmId)');
-    print('retrieved');
+    // var FarmName = box.get('FarmName');
+    // var FarmId = box.get('FarmId');
+    var farmdata=box.get('FarmData');
+    print('Info retrieved from box: $farmdata');
+
   }
   @override
   Widget build(BuildContext context) {

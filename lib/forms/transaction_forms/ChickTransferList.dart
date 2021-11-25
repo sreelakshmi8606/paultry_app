@@ -10,8 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:e_comm/form_menu.dart';
 import 'package:hive/hive.dart';
 
-import 'package:intl/intl.dart';
-
 class ChickTransferList extends StatefulWidget {
   const ChickTransferList({Key? key}) : super(key: key);
 
@@ -27,16 +25,16 @@ class _ChickTransferListState extends State<ChickTransferList> {
     setState(() {});
   }
   _addInfo(){
-    print('Info Added');
     // box.put('FarmName',
     //     data[index]['_source']['FarmName']);
     // box.put('FarmID', data[index]['_id']);
   }
   _getInfo() {
-    var FarmName = box.get('FarmName');
-    var FarmId = box.get('FarmId');
-    print('Info retrieved from box: $FarmName ($FarmId)');
-    print('Info retrieved');
+    // var FarmName = box.get('FarmName');
+    // var FarmId = box.get('FarmId');
+    var farmdata=box.get('FarmData');
+    print('Info retrieved from box: $farmdata');
+
   }
   DateTime fromDate = DateTime.now();
   DateTime toDate = DateTime.now();
@@ -114,7 +112,6 @@ class _ChickTransferListState extends State<ChickTransferList> {
                             selectedTileColor: Colors.white,
                             onTap: () {
                               print('tap');
-                               // _addInfo();
                              var farmName=box.put('FarmName',
                                   data[index]['_source']['FarmName']);
                              var farmID= box.put('FarmID', data[index]['_id']);

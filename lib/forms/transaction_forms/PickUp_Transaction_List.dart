@@ -29,10 +29,10 @@ class _PickupListWidgetState extends State<PickupListWidget> {
     box.put('FarmID', 'FarmId');
   }
   _getInfo() {
-    var Farmname = box.get('FarmName');
-    var FarmId = box.get('FarmId');
-    print('Info retrieved from box: $Farmname');
-    print('Info retrieved :$FarmId');
+    // var FarmName = box.get('FarmName');
+    // var FarmId = box.get('FarmId');
+    var farmdata=box.get('FarmData');
+    print('Info retrieved from box: $farmdata');
   }
   @override
   Widget build(BuildContext context) {

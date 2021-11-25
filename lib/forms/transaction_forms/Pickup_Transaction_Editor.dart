@@ -36,7 +36,18 @@ class _PickUpState extends State<PickUp> {
   late DateTime date;
   late String date1;
 
-  WebserviceHelper web = WebserviceHelper();
+  WebserviceHelper web = WebserviceHelper();late String farmname;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var data = Hive.box("Farm").get("FarmData");
+    print('HIVE DATA');
+    print(data);
+    farmname = data['FarmName']??"";
+    print('Farm Name : $farmname');
+  }
+
   @override
   Widget build(BuildContext context) {
     // final height = MediaQuery.of(context).size.height;
@@ -62,7 +73,27 @@ class _PickUpState extends State<PickUp> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      // SizedBox(height: height * .2),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 168.0),
+                        child: Container(
+                          // margin: EdgeInsets.symmetric(horizontal: 10),
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.lightGreen.shade900,
+                            borderRadius: BorderRadius.circular(00),
+                          ),
+
+                          child: Text(
+                            farmname,
+                            style: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
                       SizedBox(height: 50),
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
