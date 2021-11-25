@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_constructors, curly_braces_in_flow_control_structures, use_key_in_widget_constructors
+// ignore_for_file: file_names, prefer_const_constructors, curly_braces_in_flow_control_structures, use_key_in_widget_constructors, no_logic_in_create_state
 
 import 'package:e_comm/BranchBloc/branchlist_cubit.dart';
 import 'package:e_comm/Common_ui.dart';
@@ -8,12 +8,17 @@ import 'package:hive_flutter/adapters.dart';
 import 'form_menu.dart';
 
 class SelectBranch extends StatefulWidget {
+  late String email;
+  late String uid;
+  SelectBranch({required this.email,required this.uid});
   @override
-  _SelectBranchState createState() => _SelectBranchState();
+  _SelectBranchState createState() => _SelectBranchState(email: email,uid: uid);
 }
 
 class _SelectBranchState extends State<SelectBranch> {
-
+  String email;
+  String uid;
+  _SelectBranchState({ required this.email,required this.uid});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

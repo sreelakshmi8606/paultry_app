@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, unnecessary_new, avoid_print, avoid_unnecessary_containers, use_key_in_widget_constructors
+
 import 'package:e_comm/SelectBranch.dart';
 import 'package:e_comm/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,6 +14,7 @@ class GoogleButton extends StatefulWidget {
 class _GoogleButtonState extends State<GoogleButton> {
   bool _isProcessing = false;
   late String uid;
+  late String email;
   late String userEmail;
   late String name;
   late String imageUrl;
@@ -48,7 +51,7 @@ class _GoogleButtonState extends State<GoogleButton> {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   fullscreenDialog: true,
-                  builder: (context) => SelectBranch(),
+                  builder: (context) => SelectBranch(email: email,uid: uid,),
                 ),
               );
             }).catchError((error) {

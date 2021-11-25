@@ -1,11 +1,12 @@
 
-// ignore_for_file: use_key_in_widget_constructors, prefer_final_fields, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: use_key_in_widget_constructors, prefer_final_fields, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_this, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_comm/GoogleButton.dart';
 import 'package:e_comm/SelectBranch.dart';
 import 'package:e_comm/validate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -207,28 +208,50 @@ class _LoginState extends State<Login> {
                             FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
                                 email: textControllerEmail.text,
-                                password: textControllerPassword.text)
-                                .then((value) =>
+                                password: textControllerPassword.text).
+                            then((user) =>
                                 FirebaseFirestore.instance
-                                    .collection('TestDataCollection')
-                                // .add(data)
-                                    .doc('hi')
-                                    .set({
-                                  "value": 'xxxxxxx',
-                                }))
-                                .then((value) =>
-                                Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) =>
-                                      BlocProvider(
-                                          create: (context) =>
-                                          BranchlistCubit(url: '')
-                                            ..fetchData(),
-                                          child: SelectBranch()),),)
-                                    .catchError((e) => print(e)));
+                                    .collection('login').doc(
+                                    user.user!.uid).get().then((value) {
+                                  if (value.data()!['userstatus'] == 1 &&
+                                      value.data()!['status'] == 1) {
+                                    FirebaseFirestore.instance.collection(
+                                        'user').doc(user.user!.uid).get()
+                                        .then((value) =>
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SelectBranch(
+                                                      uid: value.data()!['uid'],
+                                                      email: value
+                                                          .data()!['email'],
+                                                    )
+                                            )));
+                                  }
+                                  else if (value.data()!['userstatus'] == 2 &&
+                                      value.data()!['status'] == 1) {
+                                    FirebaseFirestore.instance.collection('')
+                                        .doc(user.user!.uid)
+                                        .get()
+                                        .then((value) =>
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SelectBranch(
+                                                      uid: value.data()!['uid'],
+                                                      email: value
+                                                          .data()!['email'],
+                                                    ))));
+                                  }
+                                }
+                                ),
+                            );
                           }
                         }
                     ),
+
                     )
+
                   ],
 
                 ),

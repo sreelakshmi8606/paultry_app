@@ -19,15 +19,13 @@ class FarmMaster extends StatefulWidget {
   late String currentBatchId;
   late DateTime currentDate;
   late DateTime lastPickupDate;
-
-
+  //FarmMaster({required this.FarmId});
   @override
   _FarmMasterState createState() => _FarmMasterState();
 }
 
 class _FarmMasterState extends State<FarmMaster> {
   var uuid=Uuid();
-
   Map<String, String> selectedValueMap = Map();
   DateTime selectedDate = DateTime.now();
   late String FarmId;

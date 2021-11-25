@@ -34,8 +34,7 @@ class _ChickTransferState extends State<ChickTransfer> {
   TextEditingController pickInputcontroller = new TextEditingController();
   TextEditingController farmidInputcontroller = new TextEditingController();
   TextEditingController farmnameInputcontroller = new TextEditingController();
-  TextEditingController numberofchickInputcontroller =
-      new TextEditingController();
+  TextEditingController numberofchickInputcontroller = new TextEditingController();
   TextEditingController batchInputcontroller = new TextEditingController();
   WebserviceHelper web = WebserviceHelper();
   late String farmname;
