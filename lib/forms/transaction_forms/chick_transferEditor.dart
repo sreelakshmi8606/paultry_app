@@ -38,13 +38,19 @@ class _ChickTransferState extends State<ChickTransfer> {
       new TextEditingController();
   TextEditingController batchInputcontroller = new TextEditingController();
   WebserviceHelper web = WebserviceHelper();
-  // void addFarm(FarmDataModel farms) {
-  //   final farmBox = Hive.box('Farm');
-  //   farmBox.add(farms);
-  // }
-  // final farms = farmBox.getAt(index) as FarmDataModel;
-  // final newContact = FarmDataModel(_name,int.parse(_age));
-  // addFarm(newfarm);
+  late String farmname;
+  late String farmid;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var data = Hive.box("Farm").get("FarmData");
+    print('HIVE DATA');
+    print(data);
+    farmname = data['FarmName']??"";
+    farmid=data['FarmId']??"";
+    print('Farm Name : $farmname');
+  }
   @override
   Widget build(BuildContext context) {
     // final height = MediaQuery.of(context).size.height;
@@ -80,7 +86,7 @@ class _ChickTransferState extends State<ChickTransfer> {
                           ),
 
                           child: Text(
-                            'Farm Name',
+                            farmname,
                             style: TextStyle(
                                 color: Colors.white, fontWeight: FontWeight.bold),
                           ),
@@ -276,8 +282,9 @@ class _ChickTransferState extends State<ChickTransfer> {
         splashColor: Colors.lightGreen,
         onPressed: () async {
           Box box = Hive.box('Farm');
-          chick.FarmName = box.get('FarmName');
-          chick.FarmId = box.get('FarmID');
+          // chick.FarmName = box.get('FarmName');
+          // chick.FarmId = box.get('FarmID');
+          chick.FarmId=farmid;
           chick.Date = selectedDate;
           print('selected date $selectedDate');
           chick.FarmId = farmidInputcontroller.text;
