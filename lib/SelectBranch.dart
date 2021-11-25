@@ -62,6 +62,7 @@ class _SelectBranchState extends State<SelectBranch> {
                       selectedTileColor: Colors.white,
                       minLeadingWidth: 10,
                       onTap: () {
+                        print(data);
                         Box box = Hive.box('Farm');
                         box.put('FarmID', data[index]['_id']);
                         box.put('FarmName', data[index]['_source']['FarmName']);
@@ -70,7 +71,9 @@ class _SelectBranchState extends State<SelectBranch> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => FormMenu()));
+                                builder: (context) => FormMenu()
+                            )
+                        );
                       },
                     ),
                   );
