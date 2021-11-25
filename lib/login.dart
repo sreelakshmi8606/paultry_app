@@ -1,9 +1,11 @@
 
 // ignore_for_file: use_key_in_widget_constructors, prefer_final_fields, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_comm/GoogleButton.dart';
 import 'package:e_comm/SelectBranch.dart';
 import 'package:e_comm/validate.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -201,12 +203,30 @@ class _LoginState extends State<Login> {
                         // Text('Login'),
                         // color: Color(0xffEE7B23),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> BlocProvider(
-                            create: (context) => BranchlistCubit(url: '')..fetchData(),
-                             child: SelectBranch()),
-                      ),
-                          );
-                      }
+                          if (_loginFormKey.currentState!.validate()) {
+                            FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                email: textControllerEmail.text,
+                                password: textControllerPassword.text)
+                                .then((value) =>
+                                FirebaseFirestore.instance
+                                    .collection('TestDataCollection')
+                                // .add(data)
+                                    .doc('hi')
+                                    .set({
+                                  "value": 'xxxxxxx',
+                                }))
+                                .then((value) =>
+                                Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) =>
+                                      BlocProvider(
+                                          create: (context) =>
+                                          BranchlistCubit(url: '')
+                                            ..fetchData(),
+                                          child: SelectBranch()),),)
+                                    .catchError((e) => print(e)));
+                          }
+                        }
                     ),
                     )
                   ],
