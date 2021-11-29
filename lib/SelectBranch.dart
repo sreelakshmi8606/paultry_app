@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_constructors, curly_braces_in_flow_control_structures, use_key_in_widget_constructors, no_logic_in_create_state
+// ignore_for_file: file_names, prefer_const_constructors, curly_braces_in_flow_control_structures, use_key_in_widget_constructors, no_logic_in_create_state, must_be_immutable, avoid_print
 
 import 'package:e_comm/BranchBloc/branchlist_cubit.dart';
 import 'package:e_comm/Common_ui.dart';
