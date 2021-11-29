@@ -1,4 +1,3 @@
-
 // ignore_for_file: use_key_in_widget_constructors, prefer_final_fields, prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_this, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,6 +32,8 @@ class _LoginState extends State<Login> {
   final textControllerEmail = TextEditingController();
   final textControllerPassword = TextEditingController();
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
+  late String uid;
+  late String email;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -49,8 +50,7 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.all(25.0),
                 child: Container(
                   // child: _title(),
-                  decoration: BoxDecoration(
-                  ),
+                  decoration: BoxDecoration(),
                 ),
               ),
               Padding(
@@ -61,7 +61,10 @@ class _LoginState extends State<Login> {
                     Text(
                       'Login',
                       style: TextStyle(
-                        fontSize: 25.0, fontWeight: FontWeight.bold,color: Colors.lightGreen.shade900,),
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.lightGreen.shade900,
+                      ),
                     ),
                   ],
                 ),
@@ -76,13 +79,14 @@ class _LoginState extends State<Login> {
                   child: Column(
                     children: [
                       Card(
-
                         child: TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Email',
                             hintText: 'user@gmail.com',
                             hintStyle: TextStyle(color: Colors.black12),
-                            labelStyle: TextStyle(color: Colors.lightGreen.shade900,),
+                            labelStyle: TextStyle(
+                              color: Colors.lightGreen.shade900,
+                            ),
                             suffixIcon: Icon(
                               Icons.email,
                               color: Colors.lightGreen.shade900,
@@ -116,7 +120,9 @@ class _LoginState extends State<Login> {
                             labelText: 'Password',
                             hintText: '******',
                             hintStyle: TextStyle(color: Colors.black12),
-                            labelStyle: TextStyle(color: Colors.lightGreen.shade900,),
+                            labelStyle: TextStyle(
+                              color: Colors.lightGreen.shade900,
+                            ),
                             suffixIcon: IconButton(
                               color: Colors.lightGreen.shade900,
                               icon: Icon(
@@ -127,7 +133,7 @@ class _LoginState extends State<Login> {
                               onPressed: () {
                                 setState(() {
                                   this._passwordVisible =
-                                  !this._passwordVisible;
+                                      !this._passwordVisible;
                                 });
                               },
                             ),
@@ -184,78 +190,79 @@ class _LoginState extends State<Login> {
                         color: Colors.white,
                       ),
                       child: OutlineButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          side: BorderSide(color:Colors.lightGreen.shade900, width: 3),
-                        ),
-                        highlightElevation: 0,
-                        splashColor:Colors.lightGreen.shade900,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            // Icon(Icons.login),// icon
-                            Image(
-                              image: AssetImage("assets/images/login.png"),
-                              height: 30.0,
-                            ),
-                            Text(" Login"), // text
-                          ],
-                        ),
-                        // Text('Login'),
-                        // color: Color(0xffEE7B23),
-                        onPressed: () {
-                          if (_loginFormKey.currentState!.validate()) {
-                            FirebaseAuth.instance
-                                .createUserWithEmailAndPassword(
-                                email: textControllerEmail.text,
-                                password: textControllerPassword.text).
-                            then((user) =>
-                                FirebaseFirestore.instance
-                                    .collection('login').doc(
-                                    user.user!.uid).get().then((value) {
-                                  if (value.data()!['userstatus'] == 1 &&
-                                      value.data()!['status'] == 1) {
-                                    FirebaseFirestore.instance.collection(
-                                        'user').doc(user.user!.uid).get()
-                                        .then((value) =>
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SelectBranch(
-                                                      uid: value.data()!['uid'],
-                                                      email: value
-                                                          .data()!['email'],
-                                                    )
-                                            )));
-                                  }
-                                  else if (value.data()!['userstatus'] == 2 &&
-                                      value.data()!['status'] == 1) {
-                                    FirebaseFirestore.instance.collection('')
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            side: BorderSide(
+                                color: Colors.lightGreen.shade900, width: 3),
+                          ),
+                          highlightElevation: 0,
+                          splashColor: Colors.lightGreen.shade900,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              // Icon(Icons.login),// icon
+                              Image(
+                                image: AssetImage("assets/images/login.png"),
+                                height: 30.0,
+                              ),
+                              Text(" Login"), // text
+                            ],
+                          ),
+                          // Text('Login'),
+                          // color: Color(0xffEE7B23),
+                          onPressed: () {
+                            if (_loginFormKey.currentState!.validate()) {
+                              FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                      email: textControllerEmail.text,
+                                      password: textControllerPassword.text)
+                                  .then(
+                                    (user) => FirebaseFirestore.instance
+                                        .collection('login')
                                         .doc(user.user!.uid)
-                                        .get()
+                                        .update({
+                                      'email': textControllerEmail.text,
+                                      'uid': user.user!.uid,
+                                    })
                                         .then((value) =>
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    SelectBranch(
-                                                      uid: value.data()!['uid'],
-                                                      email: value
-                                                          .data()!['email'],
-                                                    ))));
-                                  }
-                                }
-                                ),
-                            );
+                                        Navigator.push(
+                                            context, MaterialPageRoute(
+                                            builder: (context)=>SelectBranch(
+                                               uid:uid,
+                                              email:email,
+
+                                            )
+                                        )
+                                        )
+                                      // if (value.data()!['userstatus'] == 1 &&
+                                      //     value.data()!['status'] == 1) {
+                                      //   FirebaseFirestore.instance
+                                      //       .collection('user')
+                                      //       .doc(user.user!.uid)
+                                      //       .get()
+                                      //       .then((value) => Navigator.push(
+                                      //           context,
+                                      //           MaterialPageRoute(
+                                      //               builder: (context) =>
+                                      //                   SelectBranch(
+                                      //                     uid: value
+                                      //                         .data()!['uid'],
+                                      //                     email: value
+                                      //                         .data()!['email'],
+                                      //                   ))));
+                                      // }
+                                    ),
+                                  );
+                            }
                           }
-                        }
-                    ),
-
+                          ),
                     )
-
                   ],
-
                 ),
               ),
+
+
+
               SizedBox(height: 20.0),
               GestureDetector(
                 onTap: () {
@@ -268,7 +275,7 @@ class _LoginState extends State<Login> {
                     TextSpan(
                       text: 'Signup Here',
                       style: TextStyle(
-                          color:Colors.lightGreen.shade900,
+                          color: Colors.lightGreen.shade900,
                           fontWeight: FontWeight.bold,
                           fontStyle: FontStyle.italic),
                     ),
@@ -308,4 +315,4 @@ class _LoginState extends State<Login> {
 //       ),
 //     );
 //   }
- }
+}
