@@ -65,7 +65,10 @@ class _FormMenuState extends State<FormMenu> {
           itemBuilder: (BuildContext context, int index) {
             return Card(
               elevation: 10,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomRight: Radius.circular(20.0),topRight:Radius.circular(20.0) )),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0))),
               color: Colors.white,
               child: GestureDetector(
                 onTap: () {
@@ -109,7 +112,7 @@ class _FormMenuState extends State<FormMenu> {
           MaterialPageRoute(
               builder: (context) => BlocProvider(
                     create: (context) => ChicktransferCubit(url: '')
-                      ..fetchData(DateTime.now(),DateTime.now()),
+                      ..fetchData(DateTime.now(), DateTime.now()),
                     child: ChickTransferList(),
                   )));
     else if (index == 3)
@@ -148,18 +151,17 @@ class _FormMenuState extends State<FormMenu> {
                       ..fetchData(DateTime.now(), DateTime.now()),
                     child: PickupListWidget(),
                   )));
-   else if (index == 7)
+    else if (index == 7)
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => BlocProvider(
-                create: (context) => ReportblocCubit(url: '')..fetchData(DateTime.now(), DateTime.now()),
-                child: View_Report(),
-              )));
+                    create: (context) => ReportblocCubit(url: '')
+                      ..fetchData(DateTime.now(), DateTime.now()),
+                    child: View_Report(),
+                  )));
     // else if (index == 8)
     //   Navigator.push(context,
     //       MaterialPageRoute(builder: (context) => ReportByBatch()));
-
-
   }
 }

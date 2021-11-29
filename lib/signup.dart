@@ -1,8 +1,11 @@
+// ignore_for_file: curly_braces_in_flow_control_structures
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_comm/login.dart';
 import 'package:e_comm/validate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 class Signup extends StatefulWidget {
   @override
   _SignupState createState() => _SignupState();
@@ -14,7 +17,7 @@ class _SignupState extends State<Signup> {
   final GlobalKey<FormState> _registerFormKey = GlobalKey<FormState>();
   TextEditingController textInputController = new TextEditingController();
   TextEditingController textControllerEmail = new TextEditingController();
-  TextEditingController  textControllerPassword = new TextEditingController();
+  TextEditingController textControllerPassword = new TextEditingController();
   TextEditingController cpasswordInputController = new TextEditingController();
 
   @override
@@ -225,71 +228,72 @@ class _SignupState extends State<Signup> {
                   RaisedButton(
                     onPressed: () {
                       if (_registerFormKey.currentState!
-                          .validate()) if ( textControllerPassword
-                          .text ==
+                          .validate()) if (textControllerPassword
+                              .text ==
                           cpasswordInputController.text) {
                         FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
-                            email: textControllerEmail.text,
-                            password:  textControllerPassword.text)
+                                email: textControllerEmail.text,
+                                password: textControllerPassword.text)
                             .then((user) => FirebaseFirestore.instance
-                            .collection('/users')
-                            .doc(user.user!.uid)
-                            .set({
-                          "uid":user.user!.uid,
-                          "fullname":
-                          textInputController.text.toUpperCase(),
-                          "email": textControllerEmail.text.trim(),
-                        })
-                            .then((result) => {
-                          FirebaseFirestore.instance
-                              .collection("login")
-                              .doc(user.user!.uid)
-                              .set({
-                            "email": textControllerEmail.text,
-                            "usertype": "user",
-                            "status": "1",
-                            "password": textControllerPassword.text
-                          }).then((_) {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Login()),
-                                    (_) => false);
-                          }).catchError((e) => print(e)),
-                        })
-                            .catchError((err) => print(err)))
+                                .collection('/users')
+                                .doc(user.user!.uid)
+                                .set({
+                                  "uid": user.user!.uid,
+                                  "fullname":
+                                      textInputController.text.toUpperCase(),
+                                  "email": textControllerEmail.text.trim(),
+                                })
+                                .then((result) => {
+                                      FirebaseFirestore.instance
+                                          .collection("login")
+                                          .doc(user.user!.uid)
+                                          .set({
+                                        "email": textControllerEmail.text,
+                                        "usertype": "user",
+                                        "status": "1",
+                                        "password": textControllerPassword.text,
+                                        "last_Login": DateTime.now(),
+                                      }).then((_) {
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Login()),
+                                            (_) => false);
+                                      }).catchError((e) => print(e)),
+                                    })
+                                .catchError((err) => print(err)))
                             .catchError(
-                              (e) {
+                          (e) {
                             String errorMessage;
                             switch (e.code) {
                               case "ERROR_INVALID_EMAIL":
                                 errorMessage =
-                                "Your email address appears to be malformed.";
+                                    "Your email address appears to be malformed.";
                                 break;
                               case "ERROR_WEAK_PASSWORD":
                                 errorMessage =
-                                "password consist of atleast 6 characters";
+                                    "password consist of atleast 6 characters";
                                 break;
                               case "ERROR_USER_NOT_FOUND":
                                 errorMessage =
-                                "User with this email doesn't exist.";
+                                    "User with this email doesn't exist.";
                                 break;
                               case "ERROR_USER_DISABLED":
                                 errorMessage =
-                                "User with this email has been disabled.";
+                                    "User with this email has been disabled.";
                                 break;
                               case "ERROR_TOO_MANY_REQUESTS":
                                 errorMessage =
-                                "Too many requests. Try again later.";
+                                    "Too many requests. Try again later.";
                                 break;
                               case "ERROR_OPERATION_NOT_ALLOWED":
                                 errorMessage =
-                                "Signing in with Email and Password is not enabled.";
+                                    "Signing in with Email and Password is not enabled.";
                                 break;
                               case "ERROR_EMAIL_ALREADY_IN_USE":
                                 errorMessage =
-                                "The email has already been registered. ";
+                                    "The email has already been registered. ";
                                 break;
                               default:
                                 errorMessage = "An undefined Error happened.";
@@ -301,7 +305,9 @@ class _SignupState extends State<Signup> {
                         showAlertDialog(context, "Password missmatch");
                       }
                     },
-                    child: Text('Register',),
+                    child: Text(
+                      'Register',
+                    ),
                     color: Colors.lightGreen.shade900,
                   ),
                 ],

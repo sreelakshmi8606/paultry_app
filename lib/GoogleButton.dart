@@ -2,10 +2,12 @@
 
 // ignore_for_file: deprecated_member_use, file_names
 
+import 'package:e_comm/BranchBloc/branchlist_cubit.dart';
 import 'package:e_comm/SelectBranch.dart';
 import 'package:e_comm/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleButton extends StatefulWidget {
@@ -34,8 +36,7 @@ class _GoogleButtonState extends State<GoogleButton> {
         decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: BorderSide(
-                color: Colors.lightGreen.shade900, width: 3),
+            side: BorderSide(color: Colors.lightGreen.shade900, width: 3),
           ),
           color: Colors.white,
         ),
@@ -53,10 +54,10 @@ class _GoogleButtonState extends State<GoogleButton> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          SelectBranch(
-                            uid: uid,
-                            email: email,
+                      builder: (context) => BlocProvider(
+                            create: (context) =>
+                                BranchlistCubit(url: '')..fetchData(),
+                            child: SelectBranch(email: '', uid: ''),
                           )));
             }).catchError((error) {
               print('Registration Error: $error');
@@ -67,7 +68,7 @@ class _GoogleButtonState extends State<GoogleButton> {
           },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: BorderSide(color:Colors.lightGreen.shade900, width: 3),
+            side: BorderSide(color: Colors.lightGreen.shade900, width: 3),
           ),
           highlightElevation: 0,
           // borderSide: BorderSide(color: Colors.blueGrey, width: 3),
@@ -75,41 +76,36 @@ class _GoogleButtonState extends State<GoogleButton> {
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: _isProcessing
                 ? CircularProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(
-                Colors.blueGrey,
-              ),
-            )
-                : Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              // ignore: prefer_const_literals_to_create_immutables
-              children: <Widget>[
-                Image(
-                  image: AssetImage("assets/images/google_logo.png"),
-                  height: 30.0,
-                ),
-                // Image(image: ,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    'Continue with Google',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
+                    valueColor: new AlwaysStoppedAnimation<Color>(
+                      Colors.blueGrey,
                     ),
+                  )
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: <Widget>[
+                      Image(
+                        image: AssetImage("assets/images/google_logo.png"),
+                        height: 30.0,
+                      ),
+                      // Image(image: ,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          'Continue with Google',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
           ),
         ),
       ),
     );
   }
 }
-
-
-
-
-

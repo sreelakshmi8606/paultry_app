@@ -23,9 +23,10 @@ void main() async {
   Hive.init(directory.path);
   await Hive.initFlutter();
   //Hive.registerAdapter(FarmDataModelAdapter());
- await Hive.openBox('Farm');
+  await Hive.openBox('Farm');
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
@@ -41,7 +42,9 @@ class MyApp extends StatelessWidget {
         //   child: Login(),
         // )
         //
-      home:Login(),
-    );
+        home: Login(),
+        routes: <String, WidgetBuilder>{
+          '/login': (BuildContext context) => Login(),
+        });
   }
 }

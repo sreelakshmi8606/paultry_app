@@ -18,7 +18,8 @@ class Authentication {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   static Future<FirebaseApp> initializeFirebase({
-    required BuildContext context, }) async {
+    required BuildContext context,
+  }) async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
 
     User? user = FirebaseAuth.instance.currentUser;
@@ -43,7 +44,7 @@ class Authentication {
     String uid;
     String userEmail;
     final UserCredential userCredential =
-    await _auth.createUserWithEmailAndPassword(
+        await _auth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -68,7 +69,7 @@ class Authentication {
     // Initialize Firebase
     await Firebase.initializeApp();
     final UserCredential userCredential =
-    await _auth.signInWithEmailAndPassword(
+        await _auth.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -115,7 +116,7 @@ class Authentication {
       GoogleAuthProvider authProvider = GoogleAuthProvider();
       try {
         final UserCredential userCredential =
-        await auth.signInWithPopup(authProvider);
+            await auth.signInWithPopup(authProvider);
         user = userCredential.user;
       } catch (e) {
         print(e);
@@ -123,10 +124,10 @@ class Authentication {
     } else {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount? googleSignInAccount =
-      await googleSignIn.signIn();
+          await googleSignIn.signIn();
       if (googleSignInAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
+            await googleSignInAccount.authentication;
 
         final AuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleSignInAuthentication.accessToken,
@@ -135,7 +136,7 @@ class Authentication {
 
         try {
           final UserCredential userCredential =
-          await auth.signInWithCredential(credential);
+              await auth.signInWithCredential(credential);
 
           user = userCredential.user;
         } on FirebaseAuthException catch (e) {

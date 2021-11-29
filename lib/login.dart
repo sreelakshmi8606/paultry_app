@@ -219,20 +219,43 @@ class _LoginState extends State<Login> {
                                       password: textControllerPassword.text)
                                   .then(
                                     (user) => FirebaseFirestore.instance
-                                        .collection('login')
+                                        .collection('users')
                                         .doc(user.user!.uid)
-                                        .set({
-                                      'email': textControllerEmail.text,
-                                      'uid': user.user!.uid,
-                                      'lastlogin': DateTime.now(),
-                                    }).then((value) => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SelectBranch(
-                                                          uid: uid,
-                                                          email: email,
-                                                        ))),
+                                        .get()
+                                        //     .set({
+                                        //   'email': textControllerEmail.text,
+                                        //   'uid': user.user!.uid,
+                                        //   'lastlogin': DateTime.now(),
+                                        // })
+                                        .then((value) => FirebaseFirestore
+                                                    .instance
+                                                    .collection("login")
+                                                    .doc(user.user!.uid)
+                                                    .get()
+                                                    .then((logdata) {
+                                                  if (logdata.data()![
+                                                              'usertype'] ==
+                                                          "user" &&
+                                                      logdata.data()![
+                                                              'status'] ==
+                                                          "1") {
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) => BlocProvider(
+                                                              create: (context) => BranchlistCubit(url: '')..fetchData(),
+                                                              child: SelectBranch(email: '', uid:''),
+                                                            )));
+                                                    // Navigator.pushReplacement(
+                                                    //     context,
+                                                    //     MaterialPageRoute(
+                                                    //         builder: (context) =>
+                                                    //             SelectBranch(
+                                                    //               uid: '',
+                                                    //               email: '',
+                                                    //             )));
+                                                  }
+                                                })
 
                                             // if (value.data()!['userstatus'] == 1 &&
                                             //     value.data()!['status'] == 1) {
@@ -263,8 +286,7 @@ class _LoginState extends State<Login> {
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => (
-                  Signup())));
+                      MaterialPageRoute(builder: (context) => (Signup())));
                 },
                 child: Text.rich(
                   TextSpan(text: 'Don\'t have an account?', children: [

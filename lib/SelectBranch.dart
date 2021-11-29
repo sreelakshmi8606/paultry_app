@@ -10,14 +10,19 @@ import 'form_menu.dart';
 class SelectBranch extends StatefulWidget {
   late String email;
   late String uid;
-  SelectBranch({required this.email,required this.uid,});
+  SelectBranch({
+    required this.email,
+    required this.uid,
+  });
   @override
-  _SelectBranchState createState() => _SelectBranchState(email: email,uid: uid);
+  _SelectBranchState createState() =>
+      _SelectBranchState(email: email, uid: uid);
 }
+
 class _SelectBranchState extends State<SelectBranch> {
   String email;
   String uid;
-  _SelectBranchState({ required this.email,required this.uid});
+  _SelectBranchState({required this.email, required this.uid});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,10 +72,10 @@ class _SelectBranchState extends State<SelectBranch> {
                       selectedTileColor: Colors.white,
                       minLeadingWidth: 10,
                       onTap: () {
-                       var farmdata=data[index];
+                        var farmdata = data[index];
                         print(farmdata);
                         Box box = Hive.box('Farm');
-                         box.put('FarmData',farmdata['_source']);
+                        box.put('FarmData', farmdata['_source']);
                         // box.get('FarmData');
                         // print('farmdata:$farmdata');
                         // box.put('FarmID', data[index]['_id']);
@@ -80,9 +85,7 @@ class _SelectBranchState extends State<SelectBranch> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => FormMenu()
-                            )
-                        );
+                                builder: (context) => FormMenu()));
                       },
                     ),
                   );
