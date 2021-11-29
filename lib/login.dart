@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_comm/GoogleButton.dart';
 import 'package:e_comm/SelectBranch.dart';
+import 'package:e_comm/signup.dart';
 import 'package:e_comm/validate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -220,55 +221,50 @@ class _LoginState extends State<Login> {
                                     (user) => FirebaseFirestore.instance
                                         .collection('login')
                                         .doc(user.user!.uid)
-                                        .update({
+                                        .set({
                                       'email': textControllerEmail.text,
                                       'uid': user.user!.uid,
-                                    })
-                                        .then((value) =>
-                                        Navigator.push(
-                                            context, MaterialPageRoute(
-                                            builder: (context)=>SelectBranch(
-                                               uid:uid,
-                                              email:email,
+                                      'lastlogin': DateTime.now(),
+                                    }).then((value) => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SelectBranch(
+                                                          uid: uid,
+                                                          email: email,
+                                                        ))),
 
-                                            )
-                                        )
-                                        )
-                                      // if (value.data()!['userstatus'] == 1 &&
-                                      //     value.data()!['status'] == 1) {
-                                      //   FirebaseFirestore.instance
-                                      //       .collection('user')
-                                      //       .doc(user.user!.uid)
-                                      //       .get()
-                                      //       .then((value) => Navigator.push(
-                                      //           context,
-                                      //           MaterialPageRoute(
-                                      //               builder: (context) =>
-                                      //                   SelectBranch(
-                                      //                     uid: value
-                                      //                         .data()!['uid'],
-                                      //                     email: value
-                                      //                         .data()!['email'],
-                                      //                   ))));
-                                      // }
-                                    ),
+                                            // if (value.data()!['userstatus'] == 1 &&
+                                            //     value.data()!['status'] == 1) {
+                                            //   FirebaseFirestore.instance
+                                            //       .collection('user')
+                                            //       .doc(user.user!.uid)
+                                            //       .get()
+                                            //       .then((value) => Navigator.push(
+                                            //           context,
+                                            //           MaterialPageRoute(
+                                            //               builder: (context) =>
+                                            //                   SelectBranch(
+                                            //                     uid: value
+                                            //                         .data()!['uid'],
+                                            //                     email: value
+                                            //                         .data()!['email'],
+                                            //                   ))));
+                                            // }
+                                            ),
                                   );
                             }
-                          }
-                          ),
+                          }),
                     )
                   ],
                 ),
               ),
-
-
-
               SizedBox(height: 20.0),
               GestureDetector(
                 onTap: () {
-                  // Navigator.push(context,
-                  // MaterialPageRoute(builder: (context) => (
-                  // Signup())));
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => (
+                  Signup())));
                 },
                 child: Text.rich(
                   TextSpan(text: 'Don\'t have an account?', children: [

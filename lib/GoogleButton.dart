@@ -50,12 +50,14 @@ class _GoogleButtonState extends State<GoogleButton> {
                 .then((result) {
               print(result);
               Navigator.of(context).pop();
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  fullscreenDialog: true,
-                  builder: (context) => SelectBranch(email: email,uid: uid,),
-                ),
-              );
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          SelectBranch(
+                            uid: uid,
+                            email: email,
+                          )));
             }).catchError((error) {
               print('Registration Error: $error');
             });

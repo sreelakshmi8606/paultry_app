@@ -10,11 +10,10 @@ import 'form_menu.dart';
 class SelectBranch extends StatefulWidget {
   late String email;
   late String uid;
-  SelectBranch({required this.email,required this.uid});
+  SelectBranch({required this.email,required this.uid,});
   @override
   _SelectBranchState createState() => _SelectBranchState(email: email,uid: uid);
 }
-
 class _SelectBranchState extends State<SelectBranch> {
   String email;
   String uid;
