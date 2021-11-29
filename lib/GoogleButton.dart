@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new, avoid_print, avoid_unnecessary_containers, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_new, avoid_print, avoid_unnecessary_containers, use_key_in_widget_constructors, deprecated_member_use, unused_field
 
 import 'package:e_comm/SelectBranch.dart';
 import 'package:e_comm/authentication.dart';
