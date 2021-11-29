@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new, avoid_print, avoid_unnecessary_containers, use_key_in_widget_constructors
 
+// ignore_for_file: deprecated_member_use, file_names
+
 import 'package:e_comm/SelectBranch.dart';
 import 'package:e_comm/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
