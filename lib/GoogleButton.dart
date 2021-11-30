@@ -2,6 +2,7 @@
 
 // ignore_for_file: deprecated_member_use, file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_comm/BranchBloc/branchlist_cubit.dart';
 import 'package:e_comm/SelectBranch.dart';
 import 'package:e_comm/authentication.dart';
@@ -49,16 +50,28 @@ class _GoogleButtonState extends State<GoogleButton> {
             });
             await Authentication.signInWithGoogle(context: context)
                 .then((result) {
-              print(result);
-              Navigator.of(context).pop();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => BlocProvider(
+                  FirebaseFirestore.instance.collection('users')
+                   .get().then((result) =>
+                      // Navigator.of(context).pop();
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BlocProvider(
                             create: (context) =>
-                                BranchlistCubit(url: '')..fetchData(),
+                            BranchlistCubit(url: '')..fetchData(),
                             child: SelectBranch(email: '', uid: ''),
-                          )));
+                          ))),
+                      );
+              print(result);
+              // Navigator.of(context).pop();
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => BlocProvider(
+              //               create: (context) =>
+              //                   BranchlistCubit(url: '')..fetchData(),
+              //               child: SelectBranch(email: '', uid: ''),
+              //             )));
             }).catchError((error) {
               print('Registration Error: $error');
             });

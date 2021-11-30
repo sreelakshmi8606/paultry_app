@@ -43,8 +43,9 @@ class MyApp extends StatelessWidget {
         // )
         //
         home: Login(),
-        routes: <String, WidgetBuilder>{
-          '/login': (BuildContext context) => Login(),
-        });
+        // routes: <String, WidgetBuilder>{
+        //   '/login': (BuildContext context) => Login(),
+        // }
+        );
   }
 }
